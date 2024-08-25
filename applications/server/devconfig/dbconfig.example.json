@@ -1,0 +1,6 @@
+{
+    "user": "{{ AZDB_USERNAME }}",
+    "password": "{{ AZDB_PASSWORD }}",
+    "server": "{{ AZDB_SERVER }}",
+    "database": "{{ AZDB_DATABASE }}"
+}
