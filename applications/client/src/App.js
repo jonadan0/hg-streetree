@@ -116,8 +116,8 @@ function Regist() {
           <label htmlFor="farmWorker">조건</label>
           <select name="farmWorker">
             <option>누구나</option>
+            <option>농업 무경험</option>
             <option>농업 유경험</option>
-            <option>농장을 가지고 있음</option>
           </select>
           
           <label htmlFor="farmImage">사진 업로드:</label>
@@ -164,7 +164,8 @@ function Login({ handle, setLoggedIn }) {
   const [login, setLogin] = useState(true);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [work, setWork] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const [work, setWork] = useState(false);
   const [name, setName] = useState('');
   const [idAvailable, setIdAvailable] = useState(true);
 
@@ -192,9 +193,14 @@ function Login({ handle, setLoggedIn }) {
   };
 
   const handleRegisterSubmit = async (e) => {
+    console.log(JSON.stringify({ id, password, work, name }))
     e.preventDefault();
     if (!idAvailable) {
       alert('사용할 수 없는 아이디입니다.');
+      return;
+    }
+    if (password!=rePassword) {
+      alert('비밀번호가 일치하지 않습니다.')
       return;
     }
     try {
@@ -255,16 +261,15 @@ function Login({ handle, setLoggedIn }) {
           <form onSubmit={handleRegisterSubmit}>
             <FormInput label="아이디" name="id" value={id} onChange={checkIdAvailability} />
             <FormInput label="비밀번호" name="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <FormInput label="비밀번호 재입력" name="rePw" type="password" value={rePassword} onChange={(e) => setRePassword(e.target.value)} />
             <FormInput label="실명" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-            <label htmlFor="work">경험</label>
-            <select 
+            <FormInput 
+              label="농업 유경험" 
               name="work" 
-              value={work} 
-              onChange={(e) => setWork(e.target.value)}>
-              <option value="">경험 선택</option>
-              <option value="0">농업 무경험</option>
-              <option value="1">농업 유경험</option>
-            </select>
+              type="checkbox" 
+              checked={work} 
+              onChange={(e) => setWork(e.target.checked)} 
+            />
             <Button 
               type="submit" 
               text="회원가입" 
@@ -281,6 +286,7 @@ function Login({ handle, setLoggedIn }) {
     </section>
   );
 }
+
 
 function App() {
   const viewList = {
