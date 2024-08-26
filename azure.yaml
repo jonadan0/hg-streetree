@@ -17,3 +17,4 @@ services:
         language: js
         docker:
             path: applications/server/Dockerfile
+
