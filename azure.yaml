@@ -2,7 +2,7 @@
 
 name: hg-streetree
 metadata:
-    template: azd-init@1.9.6
+    template: azd-init@1.9.5
 services:
     client:
         project: applications\client
