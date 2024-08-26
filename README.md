@@ -41,8 +41,101 @@
 
 ## 시작하기
 ### 환경설정
-...대충 여러가지 설치
+1. Visual Studio Code 설치
+    VS Code 공식 사이트에서 운영체제에 맞는 버전을 다운로드하여 설치합니다.
+2. GitHub 설정
+    GitHub 계정 생성
+    GitHub 공식 사이트에서 계정을 생성합니다.
+    GitHub CLI 설치
+    GitHub CLI는 명령줄에서 GitHub을 관리할 수 있는 도구입니다. GitHub CLI 설치 페이지에서 설치 방법을 참고하세요.
+    설치 후, gh auth login 명령어로 GitHub 계정에 로그인합니다.
+3. Azure 설정
+    Azure 계정 생성
+    Azure 공식 사이트에서 계정을 생성합니다.
+    Azure CLI 설치
+    Azure CLI 설치 페이지에서 운영체제에 맞는 방법으로 설치합니다.
+    설치 후, az login 명령어로 Azure 계정에 로그인합니다.
+    Azure Developer CLI 설치
+    Azure 개발자 도구를 사용하려면 Azure Developer CLI 설치 페이지에서 설치합니다.
+    Azure Resource Group 생성
+    Azure CLI를 사용해 자원 그룹을 생성합니다. 예를 들어, az group create --name myResourceGroup --location eastus 명령어를 사용합니다.
+4. Node.js 설치 및 React.js, Express.js 설정
+    Node.js 설치
+    Node.js 공식 사이트에서 최신 LTS 버전을 다운로드하여 설치합니다.
+    React.js 프로젝트 생성
+    VS Code 터미널에서 다음 명령어를 사용해 React.js 프로젝트를 생성합니다.
+![image](https://github.com/user-attachments/assets/342e5c0d-752d-4452-a4df-79ccb5f1595c)
 
+Express.js 프로젝트 생성
+VS Code 터미널에서 Express.js 프로젝트를 생성합니다.
+![image](https://github.com/user-attachments/assets/8232b042-a6c1-4496-87f1-83e15c81cba0)
 
+5. VS Code Extensions 설치
+    GitHub: GitHub와 통합된 기능을 제공하는 확장 프로그램입니다.
+    Azure Tools: Azure 리소스를 관리할 수 있는 확장 프로그램입니다.
+    ESLint: 코드 스타일을 검사하고 정리하는 도구입니다.
+    Prettier: 코드 포맷팅 도구입니다.
+    VS Code의 확장 프로그램 탭에서 위의 확장 프로그램들을 설치합니다.
+
+6. Git 및 프로젝트 관리
+    프로젝트를 GitHub에 올리려면, 터미널에서 다음 명령어를 사용합니다:
+![image](https://github.com/user-attachments/assets/81b0d43f-6182-44b3-9853-dc7c93afb6aa)
+
+이제 VS Code에서 GitHub, Azure, Node.js를 연동하여 개발을 시작할 수 있습니다
+
+Azure CLI 및 GitHub CLI 로그인하기
+1-1. Azure Cli설치
+
+Window https://aka.ms/installazurecliwindowsx64
+macOS
+brew update && brew install azure-cli
+Linux
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+1-2. GitHubCLI설치(https://cli.github.com/)
+
+Visual Studio Code에서 아래 명령어를 실행시켜 Azure 및 GitHub에 로그인을 합니다.
+# Azure Developer CLI login
+azd auth login
+
+# Azure CLI login
+az login
+
+# GitHub CLI login
+GITHUB_TOKEN=
+gh auth login
+로그인이 끝났다면 아래 명령어를 통해 제대로 로그인이 되어 있는지 확인합니다.
+# Azure Developer CLI
+azd auth login --check-status
+
+# Azure CLI
+az account show
+
+# GitHub CLI
+gh auth status
+Azure Developer CLI로 배포 준비하기
+아래 명령어를 차례로 실행시켜 배포 환경을 준비합니다.
+# bash/zsh
+cd $REPOSITORY_ROOT/workshop
+AZURE_ENV_NAME="{{ GITHUB_ID }}"
+azd init -e $AZURE_ENV_NAME
+
+# PowerShell
+cd $REPOSITORY_ROOT/workshop
+$AZURE_ENV_NAME = "{{ GITHUB_ID }}"
+azd init -e $AZURE_ENV_NAME
+중요: {{ GITHUB_ID }}는 자신의 GitHub 아이디로 변경해야 합니다. 예를 들어 GitHub 아이디가 example라면 {{ GITHUB_ID }}를 example로 변경하세요.
+
+Azure Container Apps로 배포하기
+아래 명령어를 실행시켜 Aspire 앱을 Azure로 배포합니다.
+azd up
+어떤 Azure 구독을 사용할 것인지 물어봅니다. 사용할 구독을 hackerground로 선택합니다.
+어느 지역에 배포할 것인지 묻습니다. 여기선 Korea Central을 선택합니다.
+GitHub Actions로 배포 자동화하기
+아래 명령어를 차례로 실행시켜 배포 자동화를 위한 준비를 합니다.
+mkdir -p .github/workflows
+cd $frontend
+아래 명령어를 실행시켜 GitHub Actions 워크플로우를 실행시킬 수 있는 환경을 설정합니다.
+azd pipeline config
+설정 마지막에 Would you like to commit and push your local changes to start the configured CI pipeline? 라는 질문이 나오면 n를 선택하고 종료합니다.
 ### 시작해봅시다
 
