@@ -42,6 +42,6 @@ jobs:
 
       - name: Deploy Application
         run: |
-          azd deploy --no-prompt --verbose`
+          azd deploy --no-prompt`
           -- app-name: "${{ secrets.AZURE_APP_NAME }}-app" `
           -- publish-profile: "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}""
