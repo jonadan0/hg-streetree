@@ -41,12 +41,8 @@
 
 ## 시작하기
 ### 환경설정
-1. chrome 열기
-2. 
- ![image](https://github.com/user-attachments/assets/78a461fd-9014-4ccc-b5e5-cc3d4c2fb224)
 
-2.검색란의 visual studio code검색
-
+먼저 Chrome 또는 Edge를 실행한 후 검색란에 Visual Studio Code를 검색합니다.<br>
 ![image](https://github.com/user-attachments/assets/98f14d69-e151-409b-b244-627cd6c02694)
 
 3.왼측상단에 visual studio code - code editing. Redefined 클릭
@@ -345,18 +341,6 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > gh auth status
 > ```
 
-> 아래 명령을 입력하여 배포 환경을 설정합니다.
-> ```
-> # {{ }} 로 감싸진 텍스트는 모두 지우고 자신의(팀의) 깃허브 아이디를 넣어줍니다. <br>
-> # Mac
-> AZURE_ENV_NAME="{{ GITHUB_ID }}"
-> # Windows
-> $AZURE_ENV_NAME = "{{ GITHUB_ID }}"
-> 
-> azd init -e $AZURE_ENV_NAME
-> # Use code in the current directory를 선택합니다.
-> # Confirm and continue initializing my app를 선택합니다.
-
 > AzureSQL 구축을 위해 https://portal.azure.com/#home에 접속합니다. <br>
 > ![alt text](images/image4.png) <br>
 > 이후 SQL databases를 클릭해주세요.
@@ -409,20 +393,21 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > 이후 파일명을 `dbconfig.example.json`에서 `dbconfig.json`로 바꿔주면 됩니다.
 
 
-
-
-## 애져 배포
+> 아래 명령을 입력하여 배포 환경을 설정합니다.
+> ```
+> # {{ }} 로 감싸진 텍스트는 모두 지우고 자신의(팀의) 깃허브 아이디를 넣어줍니다. <br>
+> # Mac
+> AZURE_ENV_NAME = "{{ GITHUB_ID }}"
+> # Windows
+> $AZURE_ENV_NAME = "{{ GITHUB_ID }}"
+> 
+> azd init -e $AZURE_ENV_NAME
+> ```
 > ![image](https://github.com/user-attachments/assets/e31ffbfd-c2e6-447f-9da4-62221b10a6f1) <br>
-> Use code in the current directory을 선택해줍니다.
-
-> 한번더 엔터를 누른후
-> 포트를 적으라고하면 80을 치고 엔터
-> 한번 더 적으라고 하면 3000을 치고 엔터를 합니다.
-> 그리고 streetree를 적고 엔터를 합니다.
-> 다 한 뒤에 azd up을 하면 됩니다.
-
-> 지역은 koreacentral을 선택합니다
-> 리소스 그룹을 물으면 rg-streetree를 치고 엔터를 누릅니다.
-
-> 애져사이트의 리소스그룹에 올라온걸 확인할 수 있습니다.
->
+> Use code in the current directory을 선택해줍니다.<br>
+> 클라이언트 포트는 80을 입력합니다.<br>
+> 서버 포트는 3000을 입력합니다.<br>
+> 이름으로 streetree를 입력합니다.<br>
+> 위 작업이 끝난 후 `azd up` 명령을 실행하면 됩니다.<br>
+> 지역은 koreacentral을 선택합니다.<br>
+> 리소스 그룹을 물으면 rg-streetree를 입력합니다.<br>
