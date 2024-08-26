@@ -42,10 +42,10 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build and push Docker image for frontend
+      - name: Build and push Docker image for client
         run: |
-          docker build -t criesfcdba3xnfa.azurecr.io/frontend:latest -f frontend/Dockerfile ./frontend
-          docker push criesfcdba3xnfa.azurecr.io/frontend:latest
+          docker build -t criesfcdba3xnfa.azurecr.io/client:latest -f client/Dockerfile ./client
+          docker push criesfcdba3xnfa.azurecr.io/client:latest
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
