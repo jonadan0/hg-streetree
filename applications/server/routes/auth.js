@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require("express");
 const router = express.Router();
 const { executeQuery } = require("../utils/db");
@@ -16,7 +18,7 @@ router.post("/login", async (req, res) => {
       req.session.user = username;
       res.send("Login successful");
     } else {
-      res.status(401).send("Invalid username or password");
+      res.json({ success: true, message: "Login successful" });
     }
   } catch (err) {
     res.status(500).send(err.message);
