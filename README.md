@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/098c2674-3877-4294-b552-235adbe60601)# 가로수 - 농락
+# 가로수 - 농락
 
 해커그라운드 해커톤에 참여하는 가로수 팀의 농락 입니다.
 
@@ -42,57 +42,77 @@
 ## 시작하기
 ### 환경설정
 1. chrome 열기
+2. 
  ![image](https://github.com/user-attachments/assets/78a461fd-9014-4ccc-b5e5-cc3d4c2fb224)
+
 2.검색란의 visual studio code검색
 
 ![image](https://github.com/user-attachments/assets/98f14d69-e151-409b-b244-627cd6c02694)
+
 3.왼측상단에 visual studio code - code editing. Redefined 클릭
 
 
 ![image](https://github.com/user-attachments/assets/93fa49af-4d99-49d8-8385-8e38dfb873db)
+
 4.파란색 버튼안에 Download for Window버튼을 클릭한다 
 
 ![image](https://github.com/user-attachments/assets/6f144f75-d10e-4142-bc47-a5ff2b35f570)
+
 ![image](https://github.com/user-attachments/assets/4c9dbeb7-1168-400a-847a-3a0a927163e9)
+
 5. 이렇게 우측 상단에 있는 다운로드 기록을 보면 visual studio code가 다운로드가 되고있음을 볼수있다.
 
 ![image](https://github.com/user-attachments/assets/6cd21164-a0d2-4117-b0c9-93ed9d3c03b0)
+
 우측상단에 다운로드가 다 되었다고 뜨면 폴더를 클릭하여 다운로드 폴더로 이동한다
+
 ![image](https://github.com/user-attachments/assets/43faacdc-e078-4f21-a093-296fc11e50b9)
+
 이렇게 visual studio code가 다운로드 되있는데 보일것이다
 지금 보이는 VScodeUserSetup.exe에다가 마우스 포인터를 갖다댄후 더블클릭을 해준다
 
 ![image](https://github.com/user-attachments/assets/4212627d-391d-476a-816d-66b4c2b3f9f4)
+
 그럼 이 화면이 나올텐데 동의합니다(A)를 선택후 사진에는 없지만 다음(next)버튼을 눌러서 넘어간다
 
 ![image](https://github.com/user-attachments/assets/8a4ae618-d649-48fa-9473-5e6ae048ae9d)
+
 그다음은 투가 작업선택창이 나올텐데 처음 보면 밑에 2개만 선택 되있을것이다
 여기사ㅓ 우리는 모두 선태하고 이번에도 마찬가지로 사진에는 없지만 다음(next)버튼을 눌러서 넘어간다
 
 ![image](https://github.com/user-attachments/assets/bdbefc0c-3f5d-43a5-a58b-e75e60a3e750)
+
 이제 그럼 이 화면이 나올텐데 여기서 설치 버튼을 누르면 설치가 진행된다
 설치가 완료되ㅣ면 화면 닫기를 누른다
 
 
 2. 크롬 검색창에 github를 입력한다
+3. 
  ![image](https://github.com/user-attachments/assets/8cf8984e-6f57-4abe-be82-f9f5f7439ae1)
+
 밑에 아이콘과 같이 github라고 되있는 것을 클릭한다
 
 ![image](https://github.com/user-attachments/assets/8d2ca1a5-8190-4727-8a64-c1f3b4a57327)
+
 여기서 GitHub: Let's build from here · GitHub 이 부분을 클릭한다.
 
 ![image](https://github.com/user-attachments/assets/eef6cd76-1d34-4726-a114-f1d3d0b9d389)
+
 처음 들어가면 이렇게 화면이 보일것이다
 여기서 sigh버튼을 누른다
 그럼 이렇게 자신의 이메일을 넣는공간이 나올것이다
+
 ![image](https://github.com/user-attachments/assets/bbefb2bf-4d5a-4f37-a112-33e4a60e9699)
+
 enter your email밑에
 
 ![image](https://github.com/user-attachments/assets/8ec03d22-f4a4-4888-a068-8568dafba29a)
+
 그럼 이렇게 비밀번호를 만드는곳이 생길것이다.
 create a password밑에 자신이 원하는 비밀번호를 입력한다
 
 ![image](https://github.com/user-attachments/assets/27cc3068-96bf-4a0f-8d8e-e2bb27a3cb06)
+
 username을 입력하는곳이 나올것이다
 enter a username 여기 밑에 입력을 한다
 
