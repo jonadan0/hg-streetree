@@ -24,12 +24,12 @@ jobs:
 
       - name: Build and push Docker image for frontend
         run: |
-          docker build -t streetree.azurecr.io/frontend:latest -f frontend/Dockerfile ./frontend
+          docker build -t streetree.azurecr.io/frontend:latest -f application/client/Dockerfile ./application/client
           docker push streetree.azurecr.io/frontend:latest
 
       - name: Build and push Docker image for backend
         run: |
-          docker build -t streetree.azurecr.io/backend:latest -f backend/Dockerfile ./backend
+          docker build -t streetree.azurecr.io/backend:latest -f application/server/Dockerfile ./application/server
           docker push streetree.azurecr.io/backend:latest
 
       - name: Deploy to Azure
