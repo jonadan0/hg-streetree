@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/farm", farmRoutes);
 app.use("/auth", authRoutes);
 
-const port = process.env.PORT || 6974;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server on port ${port}`);
 });
