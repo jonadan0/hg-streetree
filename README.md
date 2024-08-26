@@ -45,4 +45,13 @@
 
 
 ### 시작해봅시다
+> 먼저 **hackersground-kr/streetree** 저장소를 자신의 GitHub 계정으로 포크해야합니다.
+> ![alt text](images/image1.png)
+> 우측 상단의 Fork 버튼을 눌러주세요.
 
+> ![alt text](images/image2.png)
+> 이후 초록색 Create Fork 버튼을 눌러 포크할 수 있습니다.
+
+> 포크된 저장소로 이동한 후
+> ![alt text](images/image3.png)
+> 
