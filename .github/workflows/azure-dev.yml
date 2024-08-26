@@ -26,8 +26,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install Docker  # 도커 설치 단계 추가
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          sudo systemctl start docker
+          sudo systemctl enable docker
+
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
+
       - name: Log in with Azure (Federated Credentials)
         run: |
           azd auth login `
@@ -36,7 +45,6 @@ jobs:
             --tenant-id "$Env:AZURE_TENANT_ID"
         shell: pwsh
 
-
       - name: Provision Infrastructure
         run: azd provision --no-prompt
         env:
@@ -44,3 +52,4 @@ jobs:
 
       - name: Deploy Application
         run: azd deploy --no-prompt
+
