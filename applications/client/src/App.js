@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = "여기에 백엔드 api넣으세요~"
+const API = "http://localhost:6974"
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
@@ -16,11 +16,13 @@ function Button({ text, handle, className, value, type, disabled }) {
   );
 }
 
-function FormInput({ label, name, value, onChange, type = "text", placeholder = "" }) {
+function FormInput({ maxlength, className, width, height, label, name, value, onChange, type = "text", placeholder = "" }) {
   return (
-    <div className={styles.formInput}>
+    <div className={className}>
       <label htmlFor={name}>{label}</label>
       <input
+        maxLength={maxlength}
+        style={{ width, height }}  // 인라인 스타일로 width와 height 적용
         type={type}
         name={name}
         value={value}
@@ -30,6 +32,22 @@ function FormInput({ label, name, value, onChange, type = "text", placeholder = 
     </div>
   );
 }
+
+function FormTextArea({ className, width, height, label, name, value, onChange, placeholder = "" }) {
+  return (
+    <div className={className}>
+      <label htmlFor={name}>{label}</label>
+      <textarea
+        style={{ width, height, resize: "none" }}  // resize 속성으로 크기 조절 비활성화
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+}
+
 
 function ViewButton({ text, handle }) {
   return (
@@ -92,6 +110,12 @@ function Catalog() {
 }
 
 function Regist() {
+  const [farmMoney, setFarmMoney] = useState(false);
+  const [farmIntro, setFarmIntro] = useState('');
+  const [farmInfo, setFarmInfo] = useState('');
+  const [farmAddress, setFarmAddress] = useState('');
+  const [farmCrop, setFarmCrop] = useState('');
+  const [farmWork, setFarmWork] = useState(false);
   const [previewSrc, setPreviewSrc] = useState(null);
 
   const handleImageChange = (event) => {
@@ -109,48 +133,77 @@ function Regist() {
     <section className={styles.Regist}>
       <div className={styles.formContainer}>
         <form className={styles.farmForm}>
-          <FormInput name="farmName" label="밭 이름" placeholder="의성 마늘밭" />
-          <FormInput name="farmAddress" label="주소" placeholder="경상북도 의성군 의성읍" />
-          <FormInput name="farmCrop" label="작물" placeholder="마늘" />
-          
-          <label htmlFor="farmWorker">조건</label>
-          <select name="farmWorker">
-            <option>누구나</option>
-            <option>농업 무경험</option>
-            <option>농업 유경험</option>
-          </select>
-          
-          <label htmlFor="farmImage">사진 업로드:</label>
-          <input 
-            type="file" 
-            id="farmImage" 
-            name="farmImage" 
-            accept="image/*" 
-            onChange={handleImageChange} 
-          />
-        </form>
-        <div className={styles.farmPreviewList}>
-          <div className="image-preview">
-            <img 
-              className={styles.image}
-              src={previewSrc || 'placeholder_image.png'} 
-              alt="사진 없음" 
-              style={{ 
-                width: '10vw', 
-                height: '5vw', 
-                objectFit: 'cover',
-                overflow: 'hidden'
-              }}
+          <div className={styles.formInfoLeft}>
+            <FormInput placeholder="경상북도 의성군 의성읍" label="주소" name="farmAddress" value={farmAddress} onChange={(e) => setFarmAddress(e.target.value)} />
+            <FormInput placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
+            
+            <FormInput 
+              label="농업 유경험" 
+              name="farmWork" 
+              type="checkbox" 
+              checked={farmWork} 
+              onChange={(e) => setFarmWork(e.target.checked)} 
+            />
+            <FormInput 
+              label="일당 유무" 
+              name="farmMoney" 
+              type="checkbox" 
+              checked={farmMoney} 
+              onChange={(e) => setFarmMoney(e.target.checked)} 
+            />
+            
+            <label htmlFor="farmImage">밭 사진:</label>
+            <input 
+              type="file" 
+              id="farmImage" 
+              name="farmImage" 
+              accept="image/*" 
+              onChange={handleImageChange} 
+            />
+            <FormInput maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
+          </div>
+          <div className={styles.formInfoRight}>
+            <FormTextArea 
+              width="100%" 
+              height="36vh" 
+              placeholder="2000평에 일당없이 봉사할 사람 모집합니다. 새참은 챙겨드릴테니, 3일동안 해주셨으면 좋겠어요" 
+              label="상세정보" 
+              name="farmInfo" 
+              value={farmInfo} 
+              onChange={(e) => setFarmInfo(e.target.value)} 
             />
           </div>
+        </form>
+
+        <div className={styles.farmPreviewList}>
+          <img 
+            className={styles.image}
+            src={previewSrc || 'placeholder_image.png'} 
+            alt="사진 없음" 
+            style={{ 
+              width: '10vw', 
+              height: '5vw', 
+              objectFit: 'cover',
+              overflow: 'hidden'
+            }}
+          />
+          <div className={styles.PreviewList}>
+            <div className={styles.br}>주소 : {farmAddress}</div>
+            <div>작물 : {farmCrop} / </div>
+            <div>조건 : {farmWork ? "농업 유경험자만" : "누구나"}</div>
+            <div className={styles.br}>일당 유무 : {farmMoney ? "일당 O" : "자원봉사 희망"}</div>
+          </div>
+          <div className={styles.right}>소개글 : {farmIntro}</div>
         </div>
       </div>
+
       <div className={styles.farmPreviewInfo}>
-        {/* 추가 정보 표시 영역 */}
+        <div>상세정보 : {farmInfo}</div>
       </div>
     </section>
   );
 }
+
 
 function Community() {
   return (
@@ -162,29 +215,42 @@ function Community() {
 
 function Login({ handle, setLoggedIn }) {
   const [login, setLogin] = useState(true);
-  const [id, setId] = useState('');
+  const [username, setUsername] = useState(''); // 'id'를 'username'으로 변경
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   const [work, setWork] = useState(false);
   const [name, setName] = useState('');
-  const [idAvailable, setIdAvailable] = useState(true);
+  const [usernameAvailable, setUsernameAvailable] = useState(true); // 'idAvailable'을 'usernameAvailable'로 변경
 
   const handleLoginSubmit = async (e) => {
+    console.log(JSON.stringify({ username, password }));
     e.preventDefault();
     try {
-      const response = await fetch(`${API}/login`, {
+      const response = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, password }),
+        body: JSON.stringify({ username, password }),
       });
-      const data = await response.json();
-      if (data.success) {
-        setLoggedIn(true);
-        handle("둘러보기");
+
+      // 응답이 JSON 형식인지 먼저 확인
+      const contentType = response.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json(); // JSON 응답 처리
+        console.log(data);
+
+        if (data.success) {
+          setLoggedIn(true);
+          handle("둘러보기");
+        } else {
+          alert('로그인 실패: ' + data.message);
+        }
       } else {
-        alert('로그인 실패');
+        const text = await response.text(); // JSON이 아닌 경우 텍스트로 응답 처리
+        console.error('Unexpected response format:', text);
+        alert('서버로부터 예상치 못한 응답을 받았습니다: ' + text);
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -192,14 +258,15 @@ function Login({ handle, setLoggedIn }) {
     }
   };
 
+
   const handleRegisterSubmit = async (e) => {
-    console.log(JSON.stringify({ id, password, work, name }))
+    console.log(JSON.stringify({ username, password, work, name }))
     e.preventDefault();
-    if (!idAvailable) {
+    if (!usernameAvailable) {
       alert('사용할 수 없는 아이디입니다.');
       return;
     }
-    if (password!=rePassword) {
+    if (password !== rePassword) {
       alert('비밀번호가 일치하지 않습니다.')
       return;
     }
@@ -209,7 +276,7 @@ function Login({ handle, setLoggedIn }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, password, work, name }),
+        body: JSON.stringify({ username, password, work, name }), // 'id' 대신 'username' 사용
       });
       const data = await response.json();
       if (data.success) {
@@ -224,14 +291,14 @@ function Login({ handle, setLoggedIn }) {
     }
   };
 
-  const checkIdAvailability = async (e) => {
-    const enteredId = e.target.value;
-    setId(enteredId);
-    if (enteredId) {
+  const checkUsernameAvailability = async (e) => {
+    const enteredUsername = e.target.value;
+    setUsername(enteredUsername);
+    if (enteredUsername) {
       try {
-        const response = await fetch(`${API}/check-id?id=${enteredId}`);
+        const response = await fetch(`${API}/check-id?id=${enteredUsername}`);
         const data = await response.json();
-        setIdAvailable(data.available);
+        setUsernameAvailable(data.available);
         if (!data.available) {
           alert('이미 사용 중인 아이디입니다.');
         }
@@ -246,7 +313,7 @@ function Login({ handle, setLoggedIn }) {
       {login ? (
         <>
           <form onSubmit={handleLoginSubmit}>
-            <FormInput label="아이디" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+            <FormInput label="아이디" name="username" value={username} onChange={(e) => setUsername(e.target.value)} /> {/* 'id'를 'username'으로 변경 */}
             <FormInput label="비밀번호" name="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <Button type="submit" text="로그인" />
           </form>
@@ -259,7 +326,7 @@ function Login({ handle, setLoggedIn }) {
       ) : (
         <>
           <form onSubmit={handleRegisterSubmit}>
-            <FormInput label="아이디" name="id" value={id} onChange={checkIdAvailability} />
+            <FormInput label="아이디" name="username" value={username} onChange={checkUsernameAvailability} /> {/* 'id'를 'username'으로 변경 */}
             <FormInput label="비밀번호" name="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <FormInput label="비밀번호 재입력" name="rePw" type="password" value={rePassword} onChange={(e) => setRePassword(e.target.value)} />
             <FormInput label="실명" name="name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -273,7 +340,7 @@ function Login({ handle, setLoggedIn }) {
             <Button 
               type="submit" 
               text="회원가입" 
-              disabled={!idAvailable} // 아이디 중복 검사 후 사용 가능해야만 가입 가능
+              disabled={!usernameAvailable} // 아이디 중복 검사 후 사용 가능해야만 가입 가능
             />
           </form>
           <Button 
@@ -286,6 +353,7 @@ function Login({ handle, setLoggedIn }) {
     </section>
   );
 }
+
 
 
 function App() {

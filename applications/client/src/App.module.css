@@ -131,6 +131,8 @@
   border-radius: 1vi;
   width: 100%; /* 전체 너비 사용 */
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between; /* 왼쪽과 오른쪽 요소 간의 간격을 최대화 */
 }
 
 .farmForm * {
@@ -138,6 +140,7 @@
 }
 
 .farmPreviewList {
+  display: flex;
   border: 0.5vw solid greenyellow; /* 선택적으로 테두리 추가 */
   padding: 1vi;
   border-radius: 1vi;
@@ -145,9 +148,14 @@
   box-sizing: border-box;
 }
 
+.farmPreviewList * {
+  display: inline;
+}
+
 .image {
   border: 0.5vw solid greenyellow; /* 선택적으로 테두리 추가 */
   border-radius: 1vi;
+  display: inline;
 }
 
 .farmPreviewInfo {
@@ -157,4 +165,13 @@
   border: orange 0.5vw solid;
   border-radius: 1vi;
   width: 40vw;
+}
+
+.right {
+  margin-left: 1vi;
+  float: right;
+}
+
+.br {
+  display: block;
 }
