@@ -36,19 +36,16 @@ jobs:
             --tenant-id "$Env:AZURE_TENANT_ID"
         shell: pwsh
 
-      - name: Log in to Azure Container Registry
-        run: az acr login --name ${{ secrets.AZURE_CONTAINER_REGISTRY }}
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Build and Push Docker image for Client
         run: |
-          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}.azurecr.io/client:latest applications/client/ --push
+          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/client:latest applications/client/ --push
           
       - name: Build and Push Docker image for Server
         run: |
-          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}.azurecr.io/server:latest applications/server/ --push
+          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/server:latest applications/server/ --push
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
