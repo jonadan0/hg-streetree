@@ -294,3 +294,24 @@ GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사�
 > ![alt text](images/image13.png) <br>
 > 마지막으로 검토 + 만들기를 선택해줍니다.
 
+> 다시 로컬 저장소 디렉토리를 열어줍니다. <br>
+> ![alt text](images/image14.png) <br>
+> `hg-streetree/applications/server/config/dbconfig.example.json` 파일을 열어줍니다.
+> ```
+> {
+>     "user": "{{ AZDB_USERNAME }}",
+>     "password": "{{ AZDB_PASSWORD }}",
+>     "server": "{{ AZDB_SERVER }}",
+>     "database": "{{ AZDB_DATABASE }}"
+> }
+> ```
+> `{{ }}`로 감싸진 필드를 전부 알맞은 값으로 바꿔주세요. <br>
+> `{{ AZDB_USERNAME }}`: AzureSQL의 사용자 이름<br>
+> `{{ AZDB_PASSWORD }}`: AzureSQL의 사용자 패스워드<br>
+> `{{ AZDB_SERVER }}`: AzureSQL의 서버 이름<br>
+> `{{ AZDB_DATABASE }}`: AzureSQL의 데이터베이스 이름<br>
+> 이후 파일명을 `dbconfig.example.json`에서 `dbconfig.json`로 바꿔주면 됩니다.
+
+
+
+
