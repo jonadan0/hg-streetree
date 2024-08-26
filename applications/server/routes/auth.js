@@ -22,3 +22,5 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ success: false, message: err.message }); // JSON 형식으로 에러 메시지 반환
   }
 })
+
+module.exports = router;
