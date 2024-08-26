@@ -25,6 +25,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
 
@@ -41,11 +44,11 @@ jobs:
 
       - name: Build and Push Docker image for Client
         run: |
-          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/client:latest applications/client/ --push
+          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/client:latest applications/client/ --push
           
       - name: Build and Push Docker image for Server
         run: |
-          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/server:latest applications/server/ --push
+          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/server:latest applications/server/ --push
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
