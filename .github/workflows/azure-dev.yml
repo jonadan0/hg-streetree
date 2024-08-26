@@ -42,12 +42,12 @@ jobs:
 
       - name: Build and push Docker image for frontend
         run: |
-          docker build -t criesfcdba3xnfa.azurecr.io/frontend:latest -f application/client/Dockerfile ./application/client
+          docker build -t criesfcdba3xnfa.azurecr.io/frontend:latest -f applications/client/Dockerfile ./applications/client
           docker push criesfcdba3xnfa.azurecr.io/frontend:latest
 
       - name: Build and push Docker image for backend
         run: |
-          docker build -t criesfcdba3xnfa.azurecr.io/backend:latest -f application/server/Dockerfile ./application/server
+          docker build -t criesfcdba3xnfa.azurecr.io/backend:latest -f applications/server/Dockerfile ./applications/server
           docker push criesfcdba3xnfa.azurecr.io/backend:latest
 
       - name: Provision Infrastructure
