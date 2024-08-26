@@ -153,52 +153,46 @@ bash
 GitHub CLI 설치
 
 Homebrew를 사용해 GitHub CLI를 설치합니다:
-bash
-코드 복사
-brew install gh
+
+![image](https://github.com/user-attachments/assets/b010d2b1-bed6-4b35-b60e-138dcc7991ca)
+
 설치 후, gh auth login 명령어로 GitHub 계정에 로그인합니다.
 3. Azure 설정
 Azure 계정 생성
 Azure 공식 사이트에서 계정을 생성합니다.
 Azure CLI 설치
 Homebrew를 사용해 Azure CLI를 설치합니다:
-bash
-코드 복사
-brew install azure-cli
+
+![image](https://github.com/user-attachments/assets/e0025a24-3710-438e-81df-e469e46af42b)
+
 설치 후, az login 명령어를 사용하여 Azure 계정에 로그인합니다.
 Azure Developer CLI 설치
 Homebrew를 사용하여 Azure Developer CLI를 설치합니다:
-bash
-코드 복사
-brew tap azure/azd
-brew install azd
+
+![image](https://github.com/user-attachments/assets/66143954-6e3a-43c9-af3b-411f3e90c349)
+
 설치 후, azd auth login 명령어를 사용하여 Azure 계정에 로그인합니다.
 Azure Resource Group 생성
 Azure CLI를 사용하여 자원 그룹을 생성합니다:
-bash
-코드 복사
-az group create --name myResourceGroup --location eastus
+
+![image](https://github.com/user-attachments/assets/5aef8fcc-500f-4843-83bf-dd37b8fc59c8)
+
 4. Node.js 설치 및 React.js, Express.js 설정
 Node.js 설치
 Homebrew를 사용하여 Node.js를 설치합니다:
-bash
-코드 복사
-brew install node
+
+![image](https://github.com/user-attachments/assets/1e9d3c57-173a-4191-98bf-06ef34476189)
+
 React.js 프로젝트 생성
 터미널에서 다음 명령어로 React.js 프로젝트를 생성합니다:
-bash
-코드 복사
-npx create-react-app my-react-app
-cd my-react-app
-code .
+
+![image](https://github.com/user-attachments/assets/7fa3e516-bdfd-4852-91fc-c20ebafe3181)
+
 Express.js 프로젝트 생성
 터미널에서 다음 명령어로 Express.js 프로젝트를 생성합니다:
-bash
-코드 복사
-npx express-generator my-express-app
-cd my-express-app
-npm install
-code .
+
+![image](https://github.com/user-attachments/assets/62013bee-b06c-48a6-bfc9-54cf0dbad275)
+
 5. VS Code Extensions 설치
 GitHub: GitHub와 통합된 기능을 제공하는 확장 프로그램입니다.
 Azure Tools: Azure 리소스를 관리할 수 있는 확장 프로그램입니다.
@@ -208,12 +202,9 @@ VS Code의 확장 프로그램 탭에서 위의 확장 프로그램들을 설치
 
 6. Git 및 프로젝트 관리
 GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사용합니다:
-bash
-코드 복사
-git init
-git add .
-git commit -m "Initial commit"
-gh repo create <repository-name> --public --source=. --push
+
+![image](https://github.com/user-attachments/assets/745d5767-cbfd-4412-ae0c-621e07732040)
+
 ### 시작해봅시다
 > 먼저 **hackersground-kr/streetree** 저장소를 자신의 GitHub 계정으로 포크해야합니다.
 > ![alt text](images/image1.png)
