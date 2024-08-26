@@ -51,7 +51,7 @@ AI 기능 :문의 답변
 ## 제품 소개 슬라이드
 
 **(필수)** 제품 또는 서비스를 소개하는 슬라이드 덱을 리포지토리에 추가해 주세요. 슬라이드 덱은 [decks](./decks) 디렉토리에 저장한 후 이곳에 링크를 걸어주세요.
-(https://github.com/hackersground-kr/hg-streetree/blob/main/decks/hkgd%E3%85%87.pptx)
+
 
 ## 제품 소개 동영상
 
