@@ -1,9 +1,10 @@
-
 const express = require("express");
 const sql = require("mssql");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
+const multer = require("multer");
+const path = require("path");
 const app = express();
 
 const dbconfig = require("./devconfig/dbconfig.json");
@@ -20,30 +21,33 @@ const config = {
   },
 };
 
-// 세션 설정
 app.use(
   session({
     secret: crypto.randomBytes(64).toString("hex"),
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // HTTPS 통신할 경우 true로 바꿔주세요.
+    cookie: { secure: true }, //
   })
 );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// SQL 쿼리 실행 함수
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const executeQuery = async (query, params) => {
   try {
     const pool = await sql.connect(config);
-    const result = await pool
-      .request()
-      .input("username", sql.NVarChar, params.username)
-      .input("password", sql.NVarChar, params.password)
-      .input("realname", sql.NVarChar, params.realname)
-      .input("work", sql.Bit, params.work)
-      .query(query);
+    const request = pool.request();
+    
+    for (const param in params) {
+      if (params[param].type && params[param].value !== undefined) {
+        request.input(param, params[param].type, params[param].value);
+      }
+    }
+    
+    const result = await request.query(query);
     return result;
   } catch (err) {
     console.error("Database query failed:", err);
@@ -51,23 +55,39 @@ const executeQuery = async (query, params) => {
   }
 };
 
-// 아이디 존재 여부 확인
-app.get("/check-id/:id", async (req, res) => {
-  const query = `SELECT COUNT(*) AS count FROM [dbo].[users] WHERE username = @username`;
+app.post("/regifarm", upload.single("image"), async (req, res) => {
+  const { address, type, request, introduction, description } = req.body;
+  const image = req.file ? req.file.buffer : null; // 파일 버퍼를 사용해 이미지 저장
+
+  const insertQuery = `
+    INSERT INTO [dbo].[farm] (address, type, request, introduction, description, image)
+    VALUES (@address, @type, @request, @introduction, @description, @image)
+  `;
+
   try {
-    const result = await executeQuery(query, { username: req.params.id });
-    res.send(result.recordset[0].count.toString());
+    await executeQuery(insertQuery, {
+      address: { type: sql.NVarChar, value: address },
+      type: { type: sql.NVarChar, value: type },
+      request: { type: sql.NVarChar, value: request },
+      introduction: { type: sql.NVarChar, value: introduction },
+      description: { type: sql.NVarChar, value: description },
+      image: { type: sql.VarBinary, value: image }
+    });
+    
+    res.send("Farm registered successfully");
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send("Failed to register farm: " + err.message);
   }
 });
 
-// 로그인 처리
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const query = `SELECT * FROM [dbo].[users] WHERE username = @username AND password = @password`;
   try {
-    const result = await executeQuery(query, { username, password });
+    const result = await executeQuery(query, { 
+      username: { type: sql.NVarChar, value: username },
+      password: { type: sql.NVarChar, value: password }
+    });
     if (result.recordset.length > 0) {
       req.session.user = username;
       res.send("Login successful");
@@ -79,34 +99,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
-  const { username, password, realname, work } = req.body;
-  const checkQuery = `SELECT COUNT(*) AS count FROM [dbo].[users] WHERE username = @username`;
-  const insertQuery = `INSERT INTO [dbo].[users] (username, password, realname, work) VALUES (@username, @password, @realname, @work)`;
-
-  try {
-    const checkResult = await executeQuery(checkQuery, { username });
-    if (checkResult.recordset[0].count > 0) {
-      res.status(409).send("Username already exists");
-    } else {
-      await executeQuery(insertQuery, { username, password, realname, work });
-      res.send("Registration successful");
-    }
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-});
-
-app.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send("Logout failed");
-    }
-    res.send("Logout successful");
-  });
-});
-
-const port = 2626;
+const port = process.env.PORT | 2626;
 app.listen(port, () => {
   console.log(`Server on port ${port}`);
 });
