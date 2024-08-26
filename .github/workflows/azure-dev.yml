@@ -8,9 +8,11 @@ on:
       - main
 
 # Set up permissions for deploying with secretless Azure federated credentials
+# https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#set-up-azure-login-with-openid-connect-authentication
 permissions:
   id-token: write
   contents: read
+
 
 jobs:
   build:
@@ -24,24 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Remove existing containerd if it exists
-        run: |
-          sudo apt-get remove -y containerd || true
-
-      - name: Install Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
-
-      - name: Verify Docker installation
-        run: docker --version
-
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
-      
       - name: Log in with Azure (Federated Credentials)
         run: |
           azd auth login `
@@ -49,6 +35,7 @@ jobs:
             --federated-credential-provider "github" `
             --tenant-id "$Env:AZURE_TENANT_ID"
         shell: pwsh
+
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
