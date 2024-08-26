@@ -1,18 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: applications
+name: hg-streetree
 metadata:
     template: azd-init@1.9.6
 services:
     client:
-        project: client
+        project: applications\client
         host: containerapp
         language: js
         dist: build
         docker:
             path: Dockerfile
     server:
-        project: server
+        project: applications\server
         host: containerapp
         language: js
         docker:
