@@ -215,4 +215,82 @@ GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사�
 
 > 포크된 저장소로 이동한 후<br>
 > ![alt text](images/image3.png)<br>
-> 사진 순서에 따라 포크된 저장소를 로컬에 저장합니다.<br>
+> 사진 순서에 따라 포크된 저장소 URL을 복사해줍니다.<br>
+
+> 이후 터미널을 열고 다음 명령을 입력합니다<br>
+> ```
+> git clone 복사한URL
+> cd hg-streetree
+> ```
+<br>
+
+> 아래 명령을 입력하여 Azure Developer CLI, Azure CLI, GitHub CLI에 로그인합니다.
+> ```
+> # Azure Developer CLI login
+> azd auth login
+> 
+> # Azure CLI login
+> az login
+> 
+> # GitHub CLI login
+> gh auth login
+> ```
+
+
+> 이후 아래 명령을 입력하여 로그인 여부를 확인합니다.<br>
+> ```
+> # Azure Developer CLI
+> azd auth login --check-status
+> 
+> # Azure CLI
+> az account show
+> 
+> # GitHub CLI
+> gh auth status
+> ```
+
+> 아래 명령을 입력하여 배포 환경을 설정합니다.
+> ```
+> # {{ }} 로 감싸진 텍스트는 모두 지우고 자신의(팀의) 깃허브 아이디를 넣어줍니다. <br>
+> # Mac
+> AZURE_ENV_NAME="{{ GITHUB_ID }}"
+> # Windows
+> $AZURE_ENV_NAME = "{{ GITHUB_ID }}"
+> 
+> azd init -e $AZURE_ENV_NAME
+> # Use code in the current directory를 선택합니다.
+> # Confirm and continue initializing my app를 선택합니다.
+
+> AzureSQL 구축을 위해 https://portal.azure.com/#home에 접속합니다. <br>
+> ![alt text](images/image4.png) <br>
+> 이후 SQL databases를 클릭해주세요.
+
+> ![alt text](images/image5.png) <br>
+> 좌측 상단의 만들기 를 눌러주세요.
+
+> ![alt text](images/image6.png) <br>
+> 만들어둔 리소스를 선택해주세요.
+
+> ![alt text](images/image7.png) <br>
+> 데이터베이스 이름을 입력 후 밑에 있는 새로 만들기를 클릭합니다.
+
+> ![alt text](images/image8.png) <br>
+> 서버 이름 작성 후 위치는 korea central를 선택합니다.
+> sql 인증 사용 선택 후 서버 관리자 아이디와 비밀번호를 작성합니다.<br>
+
+> 이전 페이지로 돌아와서 <br>
+> ![alt text](images/image9.png) <br>
+> 워크로드 환경으로 개발, 백업 스토리지 중복으로는 지역 중복 백업 스토리지를 선택합니다.
+
+> ![alt text](images/image10.png) <br>
+> 이후 다음:네트워킹> 을 클릭해주세요.
+
+> ![alt text](images/image11.png) <br>
+> 현재 클라이언트 IP 주소 추가를 예로 변경합니다.
+
+> ![alt text](images/image12.png) <br>
+> 추가 설정 탭에서 기존 데이터 사용을 없음으로 설정합니다.
+
+> ![alt text](images/image13.png) <br>
+> 마지막으로 검토 + 만들기를 선택해줍니다.
+
