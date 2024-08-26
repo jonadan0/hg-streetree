@@ -32,17 +32,17 @@ jobs:
         working-directory: applications/client
         run: npm install
 
-      - name: Build Client
+      - name: Start Client (if no build script)
         working-directory: applications/client
-        run: npm run build
+        run: npm start
 
       - name: Install dependencies for Server
         working-directory: applications/server
         run: npm install
 
-      - name: Build Server
+      - name: Start Server (if no build script)
         working-directory: applications/server
-        run: npm run build
+        run: npm start
 
       - name: Deploy Infrastructure
         run: azd provision --no-prompt
