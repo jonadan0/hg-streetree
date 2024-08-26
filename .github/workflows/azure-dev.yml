@@ -67,7 +67,7 @@ jobs:
 
       - name: Deploy Application
         run: |
-          pushd ./hg-streetree
+          pushd ../hg-streetree
           azd deploy --no-prompt
           popd
 
