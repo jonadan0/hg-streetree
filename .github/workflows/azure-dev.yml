@@ -66,9 +66,8 @@ jobs:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
 
       - name: Deploy Application
-        run: azd deploy --no-prompt
-      - name: Ensure Docker is running
         run: |
-          sudo service docker start
-        shell: bash
+          pushd ./hg-streetree
+          azd deploy --no-prompt
+          popd
 
