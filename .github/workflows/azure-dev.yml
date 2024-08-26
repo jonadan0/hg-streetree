@@ -8,8 +8,7 @@ on:
 
     paths:
       - "hg-streetree/**/*"
-# Set up permissions for deploying with secretless Azure federated credentials
-# https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#set-up-azure-login-with-openid-connect-authentication
+
 permissions:
   id-token: write
   contents: read
@@ -27,24 +26,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Docker
-        run: sudo apt-get update && sudo apt-get install -y docker.io
+        run: |
+          sudo apt-get update && sudo apt-get install -y docker.io
+          sudo usermod -aG docker $USER
+          newgrp docker
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
       - name: Log in with Azure (Federated Credentials)
+        shell: pwsh
         run: |
           azd auth login `
             --client-id "$Env:AZURE_CLIENT_ID" `
             --federated-credential-provider "github" `
             --tenant-id "$Env:AZURE_TENANT_ID"
-        shell: pwsh
-
       - name: Provision Infrastructure
         run: azd provision --no-prompt
         env:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
-
       - name: Deploy Application
         run: |
           azd deploy --no-prompt
-        env:
-          AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
