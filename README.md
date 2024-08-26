@@ -73,30 +73,22 @@ Windows 설치 방법
 
 다음 명령어를 입력해 GitHub CLI를 설치합니다:
 
-bash
-코드 복사
+
 winget install --id GitHub.cli
 설치가 완료되면, 터미널에서 다음 명령어로 GitHub에 로그인합니다:
 
-bash
-코드 복사
 gh auth login
 로그인 과정 중 GitHub.com과 HTTPS를 선택한 후 GitHub 계정 정보를 입력합니다.
 macOS 설치 방법
 터미널을 열고 다음 명령어를 입력하여 Homebrew를 설치합니다(이미 설치되어 있다면 생략 가능):
 
-bash
-코드 복사
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 다음 명령어를 입력해 GitHub CLI를 설치합니다:
 
-bash
-코드 복사
 brew install gh
 설치 후, 다음 명령어로 GitHub에 로그인합니다:
 
-bash
-코드 복사
+
 gh auth login
 결과 확인
 로그인이 완료되면, gh auth status 명령어를 실행하여 로그인 상태를 확인합니다. 성공적으로 로그인되었다면, GitHub CLI가 준비된 것입니다.
@@ -114,16 +106,14 @@ Azure CLI는 Azure 리소스를 명령줄에서 관리할 수 있는 도구입�
 Windows 설치 방법
 PowerShell 또는 명령 프롬프트를 열고, 다음 명령어를 실행합니다:
 
-bash
-코드 복사
+
 Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -ArgumentList '/I AzureCLI.msi /quiet /norestart' -NoNewWindow -Wait
 설치가 완료되면, az --version 명령어를 실행하여 설치가 정상적으로 완료되었는지 확인합니다.
 
 macOS 설치 방법
 터미널을 열고, 다음 명령어를 실행합니다:
 
-bash
-코드 복사
+
 brew update && brew install azure-cli
 설치가 완료되면, az --version 명령어를 실행하여 설치가 정상적으로 완료되었는지 확인합니다.
 
@@ -133,16 +123,14 @@ Azure Developer CLI는 개발자들이 Azure에서 애플리케이션을 빠르�
 Windows 및 macOS 공통 설치 방법
 터미널 또는 PowerShell을 열고, 다음 명령어를 실행합니다:
 
-bash
-코드 복사
+
 az extension add --name azure-dev
 설치가 완료되면, azd auth login 명령어를 사용하여 Azure Developer CLI에 로그인합니다.
 
 Azure Resource Group 생성
 터미널 또는 PowerShell에서 다음 명령어를 사용해 자원 그룹을 생성합니다. 자원 그룹은 Azure에서 리소스들을 묶어서 관리할 수 있게 해주는 단위입니다:
 
-bash
-코드 복사
+
 az group create --name myResourceGroup --location eastus
 명령어가 성공적으로 실행되면, Azure 포털에서 myResourceGroup이라는 이름의 자원 그룹을 확인할 수 있습니다.
 
@@ -159,8 +147,7 @@ Node.js 공식 사이트에 접속하여 LTS(Long Term Support) 버전을 다운
 
 설치가 완료되면, 터미널 또는 PowerShell을 열고 다음 명령어를 입력하여 설치된 버전을 확인합니다:
 
-bash
-코드 복사
+
 node -v
 npm -v
 React.js 프로젝트 생성
@@ -168,24 +155,20 @@ VS Code를 실행하고, 터미널을 엽니다.
 
 다음 명령어를 입력하여 React.js 프로젝트를 생성합니다:
 
-bash
-코드 복사
+
 npx create-react-app my-app
 생성된 프로젝트 디렉토리로 이동합니다:
 
-bash
-코드 복사
+
 cd my-app
 Express.js 프로젝트 생성
 VS Code 터미널에서 다음 명령어를 입력하여 Express.js 프로젝트를 생성합니다:
 
-bash
-코드 복사
+
 npx express-generator my-express-app
 생성된 프로젝트 디렉토리로 이동하고, 필요한 패키지를 설치합니다:
 
-bash
-코드 복사
+
 cd my-express-app
 npm install
 결과 확인
@@ -215,28 +198,23 @@ VS Code를 열고, 좌측의 Extensions 탭(사각형 아이콘)을 클릭합니
 GitHub에 프로젝트 업로드
 VS Code 터미널에서 아래 명령어를 사용하여 Git 저장소를 초기화합니다:
 
-bash
-코드 복사
+
 git init
 프로젝트의 모든 파일을 Git에 추가합니다:
 
-bash
-코드 복사
+
 git add .
 커밋 메시지를 작성하여 변경 사항을 커밋합니다:
 
-bash
-코드 복사
+
 git commit -m "Initial commit"
 GitHub에 새 저장소를 생성한 후, 이를 원격 저장소로 추가합니다:
 
-bash
-코드 복사
+
 git remote add origin https://github.com/{YOUR_USERNAME}/{REPO_NAME}.git
 마지막으로, 프로젝트를 GitHub에 푸시합니다:
 
-bash
-코드 복사
+
 git push -u origin master
 결과 확인
 GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 해당 저장소로 이동하여 파일들이 정상적으로 업로드되었는지 확인합니다.
