@@ -2,8 +2,6 @@
 on:
   workflow_dispatch:
   push:
-    # Run when commits are pushed to mainline branch (main or master)
-    # Set this to the mainline branch you are using
     branches:
       - main
 
@@ -13,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     env:
       AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
@@ -22,7 +20,7 @@ jobs:
       AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install azd
@@ -42,10 +40,15 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build and push Docker image for client
+      - name: Build and push Docker image for frontend
         run: |
-          docker build -t criesfcdba3xnfa.azurecr.io/client:latest -f client/Dockerfile ./client
-          docker push criesfcdba3xnfa.azurecr.io/client:latest
+          docker build -t criesfcdba3xnfa.azurecr.io/frontend:latest -f application/client/Dockerfile ./application/client
+          docker push criesfcdba3xnfa.azurecr.io/frontend:latest
+
+      - name: Build and push Docker image for backend
+        run: |
+          docker build -t criesfcdba3xnfa.azurecr.io/backend:latest -f application/server/Dockerfile ./application/server
+          docker push criesfcdba3xnfa.azurecr.io/backend:latest
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
