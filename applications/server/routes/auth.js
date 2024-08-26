@@ -15,11 +15,11 @@ router.post("/login", async (req, res) => {
     console.log(result)
 
     if (result.recordset.length > 0) {
-      req.session.user = username;
-      res.json({ success: true, message: "Login successful" });
-    } else {
-      res.status(401).send("Invalid username or password");
-    }
+        req.session.user = username;
+        res.json({ success: true, message: "Login successful" }); // JSON 형식으로 응답
+      } else {
+        res.status(401).json({ success: false, message: "Invalid username or password" }); // JSON 형식으로 응답
+      }
   } catch (err) {
     res.status(500).send(err.message);
   }
