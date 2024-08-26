@@ -204,6 +204,83 @@ VS Code의 확장 프로그램 탭에서 위의 확장 프로그램들을 설치
 GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사용합니다:
 
 ![image](https://github.com/user-attachments/assets/745d5767-cbfd-4412-ae0c-621e07732040)
+Azure Developer CLI 설치:
+
+bash
+코드 복사
+brew install azure/azd/azd
+Azure CLI 설치:
+
+bash
+코드 복사
+brew install azure-cli
+GitHub CLI 설치:
+
+bash
+코드 복사
+brew install gh
+2. Azure 및 GitHub에 로그인
+GitHub Codespaces에서 실행할 경우
+GitHub Codespaces 인스턴스 안에서 아래 명령어를 실행합니다.
+
+Azure Developer CLI 로그인:
+
+bash
+코드 복사
+azd auth login --use-device-code=false
+Azure CLI 로그인:
+
+bash
+코드 복사
+az login
+GitHub CLI 로그인:
+
+bash
+코드 복사
+GITHUB_TOKEN=<your-github-token>
+gh auth login
+중요: 만약 azd auth login --use-device-code=false 또는 az login 명령어를 실행할 때 브라우저에서 404 에러가 발생한다면, 주소창의 URL을 복사하여 새 터미널에서 아래 명령어를 실행합니다.
+
+bash
+코드 복사
+curl <복사한 URL>
+Visual Studio Code에서 실행할 경우
+Mac에서 Visual Studio Code를 사용하고 있다면, 아래 명령어들을 터미널에서 실행합니다.
+
+Azure Developer CLI 로그인:
+
+bash
+코드 복사
+azd auth login
+Azure CLI 로그인:
+
+bash
+코드 복사
+az login
+GitHub CLI 로그인:
+
+bash
+코드 복사
+GITHUB_TOKEN=<your-github-token>
+gh auth login
+3. 로그인 상태 확인
+로그인이 제대로 되었는지 확인하기 위해 다음 명령어들을 실행합니다.
+
+Azure Developer CLI 상태 확인:
+
+bash
+코드 복사
+azd auth login --check-status
+Azure CLI 상태 확인:
+
+bash
+코드 복사
+az account show
+GitHub CLI 상태 확인:
+
+bash
+코드 복사
+gh auth status
 
 ## 진짜 시작해봅시다
 > 먼저 **hackersground-kr/streetree** 저장소를 자신의 GitHub 계정으로 포크해야합니다.<br>
