@@ -2,11 +2,9 @@
 on:
   workflow_dispatch:
   push:
-    # Run when commits are pushed to mainline branch (main or master)
     branches:
       - main
 
-# Set up permissions for deploying with secretless Azure federated credentials
 permissions:
   id-token: write
   contents: read
@@ -24,6 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
