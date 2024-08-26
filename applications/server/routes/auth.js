@@ -12,6 +12,8 @@ router.post("/login", async (req, res) => {
       password: { type: "NVarChar", value: password },
     });
 
+    console.log(result)
+
     if (result.recordset.length > 0) {
       req.session.user = username;
       res.json({ success: true, message: "Login successful" });
@@ -21,6 +23,7 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     res.status(500).send(err.message);
   }
+  console.log(result)
 });
 
 module.exports = router;
