@@ -233,25 +233,12 @@
 
 .registSubmit {
   background-color: white;
-  font-size: 2vw;
-  border: 0.5vi solid blue;
-  border-radius: 1vi;
-  width: 15vw;
-  height: 5vw;
-  position: absolute;
-  bottom: 1vw;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.registSubmit {
-  background-color: white;
   transition: background-color 0.5s;
-  font-size: 2vw;
+  font-size: 1.5vw;
   border: 0.5vi solid green;
   border-radius: 1vi;
   width: 15vw;
-  height: 5vw;
+  height: 3vw;
   position: absolute;
   bottom: 1vw;
   left: 50%;

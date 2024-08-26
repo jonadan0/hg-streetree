@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = "http://localhost:6974"
+const API = "http://localhost:5000"
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
@@ -16,7 +16,7 @@ function Button({ text, handle, className, value, type, disabled }) {
   );
 }
 
-function FormInput({ max, disabled, maxlength, className, width, height, label, name, value, onChange, type = "text", placeholder = "" }) {
+function FormInput({ required, max, disabled, maxlength, className, width, height, label, name, value, onChange, type = "text", placeholder = "" }) {
   return (
     <div className={className}>
       <label htmlFor={name}>{label}</label>
@@ -30,6 +30,7 @@ function FormInput({ max, disabled, maxlength, className, width, height, label, 
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
+        required={required}
       />
     </div>
   );
@@ -111,7 +112,7 @@ function Catalog() {
   );
 }
 
-function Regist({phone, name}) {
+function Regist({phone, name, handle}) {
   const [farmGiveMoney, setFarmGiveMoney] = useState(false);
   const [farmMoney, setFarmMoney] = useState('');
   const [farmIntro, setFarmIntro] = useState('');
@@ -123,6 +124,7 @@ function Regist({phone, name}) {
   const [previewSrc, setPreviewSrc] = useState(null);
   const [farmName, setFarmName] = useState(null);
   const [farmDay, setFarmDay] = useState('');
+  const [farmDate, setFarmDate] = useState('');
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -135,24 +137,61 @@ function Regist({phone, name}) {
     }
   };
 
+  const handleRegistSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${API}/farm/regifarm`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ previewSrc, farmAddress, farmCrop, farmGiveMoney, farmIntro, farmPhone, farmName, farmWork, farmDay, farmDate, farmInfo, farmMoney  }),
+      });
+
+      // 응답이 JSON 형식인지 먼저 확인
+      const contentType = response.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json(); // JSON 응답 처리
+        console.log(data);
+
+        if (data.success) {
+          handle("둘러보기");
+        } else {
+          alert('등록 실패: ' + data.message);
+        }
+      } else {
+        const text = await response.text(); // JSON이 아닌 경우 텍스트로 응답 처리
+        console.error('Unexpected response format:', text);
+        alert('서버로부터 예상치 못한 응답을 받았습니다: ' + text);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('등록 처리 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <section>
       <div className={styles.Regist}>
         <div className={styles.formContainer}>
-          <form className={styles.farmForm}>
+          <form className={styles.farmForm} onSubmit={handleRegistSubmit}>
             <div className={styles.formInfoLeft}>
-              <FormInput placeholder="경상북도 의성군 의성읍" label="주소" name="farmAddress" value={farmAddress} onChange={(e) => setFarmAddress(e.target.value)} />
-              <FormInput placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
+              <FormInput required={true} placeholder="경상북도 의성군 의성읍" label="주소" name="farmAddress" value={farmAddress} onChange={(e) => setFarmAddress(e.target.value)} />
+              <FormInput required={true} placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
               
-              <label htmlFor="farmImage">밭 사진:</label>
-              <input 
-                type="file" 
-                id="farmImage" 
-                name="farmImage" 
-                accept="image/*" 
-                onChange={handleImageChange} 
-              />
-              <FormInput maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
+              <div >
+                <label htmlFor="farmImage">밭 사진:</label>
+                <input 
+                  type="file" 
+                  id="farmImage" 
+                  name="farmImage" 
+                  accept="image/*" 
+                  onChange={handleImageChange} 
+                />
+                <FormInput required={true} type="date" label="날짜" name="farmDate" value={farmDate} onChange={(e) => setFarmDate(e.target.value)} />
+              </div>
+              <FormInput required={true} maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
               <FormInput
                 className={styles.inline}
                 label="일당 유무" 
@@ -163,7 +202,7 @@ function Regist({phone, name}) {
               />
               <div className={styles.flexbox}>
                 <FormInput type={"number"} disabled={!farmGiveMoney} className={`${styles.half} ${styles.inlineInput}`} placeholder="10000" label="총 일당" name="farmMoney" value={farmMoney} onChange={(e) => setFarmMoney(e.target.value)} />
-                <FormInput max={365} type={"number"} className={`${styles.half} ${styles.inlineInput}`} placeholder="1" label="기간" name="farmDay" value={farmDay} onChange={(e) => e.target.value < 10000 ? setFarmDay(e.target.value) : setFarmDay(9999)} />
+                <FormInput required={true} type={"number"} className={`${styles.half} ${styles.inlineInput}`} placeholder="1" label="기간" name="farmDay" value={farmDay} onChange={(e) => e.target.value < 10000 ? setFarmDay(e.target.value) : setFarmDay(9999)} />
               </div>
             </div>
             <div className={styles.formInfoRight}>
@@ -240,6 +279,7 @@ function Regist({phone, name}) {
         </div>
 
         <div className={styles.farmPreviewInfo}>
+          <h2>시작 날짜</h2><div>{farmDate}</div>
           <h2>상세정보</h2><div>{farmInfo}</div>
           <h2>일당</h2><div>{farmGiveMoney ? farmMoney.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원" : "없음"}</div>
         </div>
@@ -406,9 +446,17 @@ function App() {
   const [phone, setPhone] = useState("010-0000-0000");
   const [name, setName] = useState("홍길동");
 
+  const handleViewChange = (key) => {
+    if (key === "로그인") {
+      setView(<Login handle={handleViewChange} setLoggedIn={setLoggedIn} />);
+    } else {
+      setView(viewList[key]);
+    }
+  };
+
   const viewList = {
     "둘러보기": <Catalog />,
-    "등록하기": <Regist phone={phone} name={name} />,
+    "등록하기": <Regist phone={phone} name={name} handle={handleViewChange} />,
     "소통마당": <Community />,
   };
 
@@ -433,14 +481,6 @@ function App() {
         setLoggedIn(false);
       });
   }, []); // 빈 배열은 컴포넌트가 마운트될 때만 호출되게 함
-
-  const handleViewChange = (key) => {
-    if (key === "로그인") {
-      setView(<Login handle={handleViewChange} setLoggedIn={setLoggedIn} />);
-    } else {
-      setView(viewList[key]);
-    }
-  };
 
   return (
     <div className={styles.App}>
