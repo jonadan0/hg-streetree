@@ -26,12 +26,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Remove existing containerd if it exists
+        run: |
+          sudo apt-get remove -y containerd || true
+
       - name: Install Docker
         run: |
           sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+      # Alternatively, use Docker's official installation script
+      # - name: Install Docker (Alternative)
+      #   run: |
+      #     curl -fsSL https://get.docker.com -o get-docker.sh
+      #     sudo sh get-docker.sh
 
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
