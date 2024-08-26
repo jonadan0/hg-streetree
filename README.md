@@ -393,9 +393,6 @@ gh auth status
 
 
 ## 애져 배포
-
-> 가장 상위디렉토리인 hg-streetree 디렉토리에서 azd init을 한다.
-
 > ![image](https://github.com/user-attachments/assets/e31ffbfd-c2e6-447f-9da4-62221b10a6f1) <br>
 > Use code in the current directory을 선택해줍니다.
 
@@ -403,11 +400,10 @@ gh auth status
 > 포트를 적으라고하면 80을 치고 엔터
 > 한번 더 적으라고 하면 3000을 치고 엔터를 합니다.
 > 그리고 streetree를 적고 엔터를 합니다.
+> 다 한 뒤에 azd up을 하면 됩니다.
 
 > 지역은 koreacentral을 선택합니다
 > 리소스 그룹을 물으면 rg-streetree를 치고 엔터를 누릅니다.
 
 > 애져사이트의 리소스그룹에 올라온걸 확인할 수 있습니다.
 >
-> az init 이라는 명령어는 작동하지 않습니다.
-
