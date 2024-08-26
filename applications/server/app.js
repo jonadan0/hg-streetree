@@ -18,6 +18,10 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+    console.log(req.method + ' ' + req.url)
+})
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
