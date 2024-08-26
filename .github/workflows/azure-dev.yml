@@ -3,12 +3,10 @@ on:
   workflow_dispatch:
   push:
     # Run when commits are pushed to mainline branch (main or master)
-    # Set this to the mainline branch you are using
     branches:
       - main
 
 # Set up permissions for deploying with secretless Azure federated credentials
-# https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux#set-up-azure-login-with-openid-connect-authentication
 permissions:
   id-token: write
   contents: read
@@ -43,11 +41,11 @@ jobs:
 
       - name: Build and Push Docker image for Client
         run: |
-          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/client:latest . --push
+          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/client:latest applications/client/ --push
           
       - name: Build and Push Docker image for Server
         run: |
-          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/server:latest . --push
+          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ vars.AZURE_CLIENT_ID }}/server:latest applications/server/ --push
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
