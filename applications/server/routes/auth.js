@@ -12,18 +12,13 @@ router.post("/login", async (req, res) => {
       password: { type: "NVarChar", value: password },
     });
 
-    console.log(result)
-
     if (result.recordset.length > 0) {
-        req.session.user = username;
-        res.json({ success: true, message: "Login successful" }); // JSON 형식으로 응답
-      } else {
-        res.status(401).json({ success: false, message: "Invalid username or password" }); // JSON 형식으로 응답
-      }
+      req.session.user = username;
+      res.json({ success: true, message: "Login successful" }); // JSON 형식으로 응답
+    } else {
+      res.status(401).json({ success: false, message: "Invalid username or password" }); // JSON 형식으로 응답
+    }
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).json({ success: false, message: err.message }); // JSON 형식으로 에러 메시지 반환
   }
-  console.log(result)
-});
-
-module.exports = router;
+})
