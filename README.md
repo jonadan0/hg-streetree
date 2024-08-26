@@ -276,7 +276,7 @@ GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사�
 
 > ![alt text](images/image8.png) <br>
 > 서버 이름 작성 후 위치는 korea central를 선택합니다.
-> sql 인증 사용 선택 후 서버 관리자 아이디와 비밀번호를 작성합니다.<br>
+> sql 인증 사용을 선택해주고 서버 관리자 아이디와 비밀번호를 작성 후 확인을 눌러줍니다.<br>
 
 > 이전 페이지로 돌아와서 <br>
 > ![alt text](images/image9.png) <br>
