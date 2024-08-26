@@ -2,11 +2,14 @@ const express = require("express");
 const session = require("express-session");
 const crypto = require("crypto");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 const farmRoutes = require("./routes/farm");
 const authRoutes = require("./routes/auth");
 
 const app = express();
+
+app.use(cors());
 
 // Session setup
 app.use(
@@ -29,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/farm", farmRoutes);
 app.use("/auth", authRoutes);
 
-const port = process.env.PORT || 2626;
+const port = process.env.PORT || 6974;
 app.listen(port, () => {
   console.log(`Server on port ${port}`);
 });
