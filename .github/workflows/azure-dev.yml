@@ -42,6 +42,4 @@ jobs:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
 
       - name: Deploy Application
-        run: |
-          cd path/to/project/root
-          azd deploy --no-prompt
+        run: azd deploy --no-prompt
