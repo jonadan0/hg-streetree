@@ -10,61 +10,41 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
-      AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
+      AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+      AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Docker using official script
-        run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sh get-docker.sh
-          sudo usermod -aG docker $USER
-          export PATH=$PATH:/usr/bin/docker
-          sudo systemctl start docker
-          sudo systemctl enable docker
-        shell: bash
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
 
-      - name: Verify Docker installation
-        run: |
-          which docker
-          docker --version
-        shell: bash
+      - name: Install dependencies for Client
+        working-directory: applications/client
+        run: npm install
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Build Client
+        working-directory: applications/client
+        run: npm run build
 
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Install dependencies for Server
+        working-directory: applications/server
+        run: npm install
 
-      - name: Install azd
-        uses: Azure/setup-azd@v1.0.0
+      - name: Build Server
+        working-directory: applications/server
+        run: npm run build
 
-      - name: Log in with Azure (Federated Credentials)
-        run: |
-          azd auth login `
-            --client-id "$Env:AZURE_CLIENT_ID" `
-            --federated-credential-provider "github" `
-            --tenant-id "$Env:AZURE_TENANT_ID"
-        shell: pwsh
-
-      - name: Build and Push Docker image for Client
-        run: |
-          docker buildx build --platform linux/amd64 -f applications/client/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/client:latest applications/client/ --push
-
-      - name: Build and Push Docker image for Server
-        run: |
-          docker buildx build --platform linux/amd64 -f applications/server/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/server:latest applications/server/ --push
-
-      - name: Provision Infrastructure
+      - name: Deploy Infrastructure
         run: azd provision --no-prompt
         env:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
