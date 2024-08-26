@@ -72,7 +72,7 @@ resource app 'Microsoft.App/containerApps@2023-05-02-preview' = {
     configuration: {
       ingress:  {
         external: true
-        targetPort: 80
+        targetPort: 3000
         transport: 'auto'
         corsPolicy: {
           allowedOrigins: union(allowedOrigins, [
@@ -105,7 +105,7 @@ resource app 'Microsoft.App/containerApps@2023-05-02-preview' = {
             }
             {
               name: 'PORT'
-              value: '80'
+              value: '3000'
             }
           ],
           env,
