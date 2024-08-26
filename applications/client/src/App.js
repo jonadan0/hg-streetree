@@ -16,11 +16,12 @@ function Button({ text, handle, className, value, type, disabled }) {
   );
 }
 
-function FormInput({ maxlength, className, width, height, label, name, value, onChange, type = "text", placeholder = "" }) {
+function FormInput({ max, disabled, maxlength, className, width, height, label, name, value, onChange, type = "text", placeholder = "" }) {
   return (
     <div className={className}>
       <label htmlFor={name}>{label}</label>
       <input
+        max={max}
         maxLength={maxlength}
         style={{ width, height }}  // 인라인 스타일로 width와 height 적용
         type={type}
@@ -28,6 +29,7 @@ function FormInput({ maxlength, className, width, height, label, name, value, on
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        disabled={disabled}
       />
     </div>
   );
@@ -109,14 +111,18 @@ function Catalog() {
   );
 }
 
-function Regist() {
-  const [farmMoney, setFarmMoney] = useState(false);
+function Regist({phone, name}) {
+  const [farmGiveMoney, setFarmGiveMoney] = useState(false);
+  const [farmMoney, setFarmMoney] = useState('');
   const [farmIntro, setFarmIntro] = useState('');
   const [farmInfo, setFarmInfo] = useState('');
   const [farmAddress, setFarmAddress] = useState('');
   const [farmCrop, setFarmCrop] = useState('');
   const [farmWork, setFarmWork] = useState(false);
+  const [farmPhone, setFarmPhone] = useState(false);
   const [previewSrc, setPreviewSrc] = useState(null);
+  const [farmName, setFarmName] = useState(null);
+  const [farmDay, setFarmDay] = useState('');
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -130,75 +136,113 @@ function Regist() {
   };
 
   return (
-    <section className={styles.Regist}>
-      <div className={styles.formContainer}>
-        <form className={styles.farmForm}>
-          <div className={styles.formInfoLeft}>
-            <FormInput placeholder="경상북도 의성군 의성읍" label="주소" name="farmAddress" value={farmAddress} onChange={(e) => setFarmAddress(e.target.value)} />
-            <FormInput placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
-            
-            <FormInput 
-              label="농업 유경험" 
-              name="farmWork" 
-              type="checkbox" 
-              checked={farmWork} 
-              onChange={(e) => setFarmWork(e.target.checked)} 
-            />
-            <FormInput 
-              label="일당 유무" 
-              name="farmMoney" 
-              type="checkbox" 
-              checked={farmMoney} 
-              onChange={(e) => setFarmMoney(e.target.checked)} 
-            />
-            
-            <label htmlFor="farmImage">밭 사진:</label>
-            <input 
-              type="file" 
-              id="farmImage" 
-              name="farmImage" 
-              accept="image/*" 
-              onChange={handleImageChange} 
-            />
-            <FormInput maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
-          </div>
-          <div className={styles.formInfoRight}>
-            <FormTextArea 
-              width="100%" 
-              height="36vh" 
-              placeholder="2000평에 일당없이 봉사할 사람 모집합니다. 새참은 챙겨드릴테니, 3일동안 해주셨으면 좋겠어요" 
-              label="상세정보" 
-              name="farmInfo" 
-              value={farmInfo} 
-              onChange={(e) => setFarmInfo(e.target.value)} 
-            />
-          </div>
-        </form>
+    <section>
+      <div className={styles.Regist}>
+        <div className={styles.formContainer}>
+          <form className={styles.farmForm}>
+            <div className={styles.formInfoLeft}>
+              <FormInput placeholder="경상북도 의성군 의성읍" label="주소" name="farmAddress" value={farmAddress} onChange={(e) => setFarmAddress(e.target.value)} />
+              <FormInput placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
+              
+              <label htmlFor="farmImage">밭 사진:</label>
+              <input 
+                type="file" 
+                id="farmImage" 
+                name="farmImage" 
+                accept="image/*" 
+                onChange={handleImageChange} 
+              />
+              <FormInput maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
+              <FormInput
+                className={styles.inline}
+                label="일당 유무" 
+                name="farmGiveMoney" 
+                type="checkbox" 
+                checked={farmGiveMoney} 
+                onChange={(e) => setFarmGiveMoney(e.target.checked)} 
+              />
+              <div className={styles.flexbox}>
+                <FormInput type={"number"} disabled={!farmGiveMoney} className={`${styles.half} ${styles.inlineInput}`} placeholder="10000" label="총 일당" name="farmMoney" value={farmMoney} onChange={(e) => setFarmMoney(e.target.value)} />
+                <FormInput max={365} type={"number"} className={`${styles.half} ${styles.inlineInput}`} placeholder="1" label="기간" name="farmDay" value={farmDay} onChange={(e) => e.target.value < 10000 ? setFarmDay(e.target.value) : setFarmDay(9999)} />
+              </div>
+            </div>
+            <div className={styles.formInfoRight}>
+              <FormTextArea 
+                width="100%" 
+                height="30vh" 
+                placeholder="7500평 밭 일당없이 봉사할 사람 모집합니다. 초코파이는 챙겨드릴테니, 30일동안 해주셨으면 좋겠어요. 주로 할일은 잡초 뽑기, 비료 뿌리기, 돌 걸러내기 입니다." 
+                label="상세정보" 
+                name="farmInfo" 
+                value={farmInfo} 
+                onChange={(e) => setFarmInfo(e.target.value)} 
+              />
+              <FormInput 
+                className={`${styles.inline}`}
+                label="전화번호 표시" 
+                name="farmPhone" 
+                type="checkbox" 
+                checked={farmPhone} 
+                onChange={(e) => setFarmPhone(e.target.checked)} 
+              />
+              <FormInput 
+                className={styles.inline}
+                label="실명 표시" 
+                name="farmName" 
+                type="checkbox" 
+                checked={farmName} 
+                onChange={(e) => setFarmName(e.target.checked)} 
+              />
+              <FormInput 
+                className={styles.inline}
+                label="농업 유경험자 희망" 
+                name="farmWork" 
+                type="checkbox" 
+                checked={farmWork} 
+                onChange={(e) => setFarmWork(e.target.checked)} 
+              />
+            </div>
+            <Button text={"등록"} type={"submit"} className={styles.registSubmit} />
+          </form>
 
-        <div className={styles.farmPreviewList}>
-          <img 
-            className={styles.image}
-            src={previewSrc || 'placeholder_image.png'} 
-            alt="사진 없음" 
-            style={{ 
-              width: '10vw', 
-              height: '5vw', 
-              objectFit: 'cover',
-              overflow: 'hidden'
-            }}
-          />
-          <div className={styles.PreviewList}>
-            <div className={styles.br}>주소 : {farmAddress}</div>
-            <div>작물 : {farmCrop} / </div>
-            <div>조건 : {farmWork ? "농업 유경험자만" : "누구나"}</div>
-            <div className={styles.br}>일당 유무 : {farmMoney ? "일당 O" : "자원봉사 희망"}</div>
+          <div className={styles.farmPreviewList}>
+            <img 
+              className={styles.image}
+              src={previewSrc || 'placeholder_image.png'} 
+              alt="사진 없음" 
+              style={{ 
+                width: '10vw', 
+                height: '5vw', 
+                objectFit: 'cover',
+                overflow: 'hidden'
+              }}
+            />
+            <div className={styles.PreviewList}>
+              <div className={styles.simpleList}>
+                <div className={styles.br}>주소 : {farmAddress}</div>
+                <div>작물 : {farmCrop}</div>
+                <div className={styles.br}>일당 유무 : {farmGiveMoney ? "일당 O" : "자원봉사 희망"}</div>
+              </div>
+            </div>
+            <div className={`${styles.right}`}>
+              <label>소개글:</label><div>{farmIntro}</div>
+              <div className={`${styles.br} ${styles.side}`}>
+                <div className={styles.fix}>전화번호 : {farmPhone ? phone : "비공개"}</div>
+                <div className={`${styles.inline} ${styles.space}`}>
+                  실명 : {farmName ? name : "비공개"}
+                </div>
+              </div>
+              <div className={styles.side} style={{width:"22vw"}}>
+                <div>조건 : {farmWork ? "농업 유경험자 희망" : "누구나"}</div>
+                <div style={{width:"7.9vw"}}>기간(일) : {farmDay}</div>
+              </div>
+            </div>
           </div>
-          <div className={styles.right}>소개글 : {farmIntro}</div>
         </div>
-      </div>
 
-      <div className={styles.farmPreviewInfo}>
-        <div>상세정보 : {farmInfo}</div>
+        <div className={styles.farmPreviewInfo}>
+          <h2>상세정보</h2><div>{farmInfo}</div>
+          <h2>일당</h2><div>{farmGiveMoney ? farmMoney.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원" : "없음"}</div>
+        </div>
       </div>
     </section>
   );
@@ -220,6 +264,7 @@ function Login({ handle, setLoggedIn }) {
   const [rePassword, setRePassword] = useState('');
   const [work, setWork] = useState(false);
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [usernameAvailable, setUsernameAvailable] = useState(true); // 'idAvailable'을 'usernameAvailable'로 변경
 
   const handleLoginSubmit = async (e) => {
@@ -330,6 +375,7 @@ function Login({ handle, setLoggedIn }) {
             <FormInput label="비밀번호" name="pw" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <FormInput label="비밀번호 재입력" name="rePw" type="password" value={rePassword} onChange={(e) => setRePassword(e.target.value)} />
             <FormInput label="실명" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+            <FormInput label="전화번호" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
             <FormInput 
               label="농업 유경험" 
               name="work" 
@@ -357,9 +403,12 @@ function Login({ handle, setLoggedIn }) {
 
 
 function App() {
+  const [phone, setPhone] = useState("010-0000-0000");
+  const [name, setName] = useState("홍길동");
+
   const viewList = {
     "둘러보기": <Catalog />,
-    "등록하기": <Regist />,
+    "등록하기": <Regist phone={phone} name={name} />,
     "소통마당": <Community />,
   };
 

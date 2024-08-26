@@ -142,7 +142,7 @@
 .farmPreviewList {
   display: flex;
   border: 0.5vw solid greenyellow; /* 선택적으로 테두리 추가 */
-  padding: 1vi;
+  padding: 0.4vi;
   border-radius: 1vi;
   width: 50vw;
   box-sizing: border-box;
@@ -151,27 +151,114 @@
 .farmPreviewList * {
   display: inline;
 }
+.PreviewList {
+  padding-right: 1vi;
+  border-right: 1px solid black;
+}
+
+.simpleList * {
+  min-width: 11.8vw;
+  max-width: 20vw;
+  width: 100%; /* 부모 요소에 맞게 너비 조정 */
+}
 
 .image {
-  border: 0.5vw solid greenyellow; /* 선택적으로 테두리 추가 */
+  border: 0.5vw solid lightgreen; /* 선택적으로 테두리 추가 */
   border-radius: 1vi;
   display: inline;
 }
 
 .farmPreviewInfo {
-  height: 90.5%;
+  height: 60vh;
   padding: 1vi;
   margin-left: 2vw;
   border: orange 0.5vw solid;
   border-radius: 1vi;
   width: 40vw;
+  overflow-y: scroll;
 }
 
 .right {
-  margin-left: 1vi;
-  float: right;
+  margin-left: 0.2vi;
+  height: 2vi;
+  /* float: right; */
+  /* min-width: 5vw; */
 }
 
 .br {
   display: block;
+}
+
+.inline {
+  display: inline-flex;
+}
+
+.flexbox {
+  display: flex;
+  width: 20vw;
+}
+
+.half {
+  width: 50%;
+}
+
+.half input {
+  width: 80%;
+}
+
+.half label {
+  width: 80%;
+}
+
+.space {
+  margin-left: 1vi;
+}
+
+.side {
+  width: 100%; /* 전체 너비 사용 */
+  box-sizing: border-box;
+  display: flex;
+  width: 22vi;
+  justify-content: space-between;
+}
+
+.side * {
+  position: relative;
+  display: inline-flex;
+}
+
+.tb label {
+  display: block;
+}
+
+.registSubmit {
+  background-color: white;
+  font-size: 2vw;
+  border: 0.5vi solid blue;
+  border-radius: 1vi;
+  width: 15vw;
+  height: 5vw;
+  position: absolute;
+  bottom: 1vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.registSubmit {
+  background-color: white;
+  transition: background-color 0.5s;
+  font-size: 2vw;
+  border: 0.5vi solid green;
+  border-radius: 1vi;
+  width: 15vw;
+  height: 5vw;
+  position: absolute;
+  bottom: 1vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.registSubmit:hover {
+  background-color: lightgreen;
+  transition: background-color 0.5s;
 }
