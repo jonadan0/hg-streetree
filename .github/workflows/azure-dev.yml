@@ -23,6 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Remove conflicting containerd package
+        run: |
+          sudo apt-get remove -y containerd
+          sudo apt-get purge -y containerd
+        shell: bash
+
       - name: Install Docker
         run: |
           sudo apt-get update
