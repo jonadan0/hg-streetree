@@ -5,15 +5,16 @@ metadata:
     template: azd-init@1.9.6
 services:
     client:
-        project: applications\client
+        project: applications/client
         host: containerapp
         language: js
         dist: build
         docker:
-            path: Dockerfile
+            path: applications/client/Dockerfile
     server:
-        project: applications\server
+        project: applications/server
         host: containerapp
         language: js
         docker:
-            path: Dockerfile
+            path: applications/server/Dockerfile
+
