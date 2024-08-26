@@ -117,7 +117,8 @@ username을 입력하는곳이 나올것이다
 enter a username 여기 밑에 입력을 한다
 
 
-ㄱ![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/e8f11e90-236d-4546-909b-2f8fe7645cc2)
+
 여기에 마지막으로 email을 정보수집 동의를 한다는 체크박스에 표시를 하고 countiue버튼을 누른다
 
 잠시기다리면 로봇이 아닙니다 관련 퀴즈를 풀어야 계정을 생성할수있다
@@ -126,9 +127,36 @@ Windows 설치 방법
 명령 프롬프트나 PowerShell을 엽니다.
 
 다음 명령어를 입력해 GitHub CLI를 설치합니다:
-winget이 설치되지 않은 분들은 https://www.lainyzine.com/ko/article/how-to-install-winget-on-windows-10/
-이 링크를 참고하시길 바랍니다.
+winget이 설치되지 않은 분들은 
+마이크로소프트 스토어를 검색 -->열기-->검색 클릭-->앱 설치 관리자  검색--> 설치
+![image](https://github.com/user-attachments/assets/5bc6f988-8826-44e6-a6a4-d4cd85031cb0)
+하지만 미리보기 버전을 설치하기 위해서는 먼저 패키지 매니저 인사이더 프로그램이나 윈도우 인사이더 프로그램에 가입해야합니다.
 
+Join the Windows Package Manager Insiders Program
+Windows Insider
+이 방법을 사용해도 괜찮습니다만 여기서는 인사이더 프로그램 가입 없이 바로 winget 명령어를 설치하는 방법을 소개하겠습니다.
+
+최근 Microsoft의 소프트웨어 개발 기조가 바뀌면서 Windows Terminal, PowerShell, winget-cli 등 많은 애플리케이션이 오픈소스로 개발되고 있습니다. winget-cli 역시 오픈소스 프로젝트로 개발되고 있으며, GitHub를 통해서 소스코드 및 릴리스 파일이 공개되어있습니다. 아래 GitHub의 릴리스 페이지에서 winget-cli의 최신 버전을 다운로드 받고 설치할 수 있습니다.
+
+Releases · microsoft/winget-cli
+릴리스에는 프리뷰가 붙은 버전과 붙지 않은 버전이 있습니다. 이는 마이크로소프트 스토어에서 제공하는 앱 설치 관리자와는 달리 둘 다 커맨드라인 명령어를 제공합니다. 여기서는 preview가 없는 정식 버전을 설치해보겠습니다. 현재 시점에서 최신 버전인 v1.0.11451 버전의 릴리스 페이지로 이동합니다.
+
+Release Windows Package Manager v1.0.11451 · microsoft/winget-cli
+이 페이지 하단에서 확장자가 .appxbundle로 끝나는 설치 파일을 다운로드 받고 실행합니다.
+
+커맨드라인 명령어를 포함한 앱 설치 관리자를 설치합니다
+커맨드라인 명령어를 포함한 앱 설치 관리자를 설치합니다
+앱 설치 관리자를 업데이트할 지 물어봅니다. 설치 과정에서 확인할 수 있듯이, 릴리스 페이지에서 제공하는 파일은 Microsoft에서 공식적으로 개발중인 버전으로 신뢰할 수 있는 Microsoft Store 앱입니다. 업데이트를 클릭해 설치를 진행합니다.
+
+winget 설치가 완료된 화면
+winget 설치가 완료된 화면
+설치가 끝나면 위와 같은 화면이 나타납니다. 별도로 종료 버튼이 없으니, 설치 창은 종료해주시기바랍니다.
+
+winget 명령어 설치 확인#
+이제 가상 터미널에서 winget 명령어로 패키지를 설치할 수 있습니다. 간단히 테스트를 위해서 Windows Terminal이나 Powershell을 실행해주세요. 아직 Windows Terminal을 설치하지 않았다면 먼저 설치하는 것을 추천합니다. (이미 셸이 실행되어있었다면 터미널을 재실행해야 winget이 정상적으로 실행됩니다.)
+
+관련 글:Windows Terminal(PowerShell, WSL2 등) 설치하는 방법
+셸에서 winget 명령어를 입력해보면 v1.0.11451이 설치된 것을 확인할 수 있습니다.
 winget install --id GitHub.cli
 설치가 완료되면, 터미널에서 다음 명령어로 GitHub에 로그인합니다:
 gh auth login
