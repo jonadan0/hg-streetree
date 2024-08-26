@@ -41,42 +41,124 @@
 
 ## 시작하기
 ### 환경설정
-1. Visual Studio Code 설치
-**Visual Studio Code (VS Code)**는 매우 강력하고 확장 가능한 코드 편집기입니다. 이 도구는 다양한 프로그래밍 언어와 통합되며, 특히 웹 개발에 자주 사용됩니다.
+1. chrome 열기
+2. 
+ ![image](https://github.com/user-attachments/assets/78a461fd-9014-4ccc-b5e5-cc3d4c2fb224)
 
-Windows 설치 방법
-Visual Studio Code 공식 사이트에 접속합니다.
-페이지 중앙에 있는 Download for Windows 버튼을 클릭합니다.
-설치 파일이 다운로드되면, 이를 실행하여 설치 과정을 시작합니다.
-설치 중 Add to PATH 옵션을 선택합니다. 이 옵션은 VS Code를 명령줄에서 쉽게 실행할 수 있도록 해줍니다.
-나머지 기본 설정으로 설치를 완료합니다.
-macOS 설치 방법
-Visual Studio Code 공식 사이트에 접속합니다.
-Download for macOS 버튼을 클릭합니다.
-다운로드된 .zip 파일을 열고, Visual Studio Code 애플리케이션을 Applications 폴더로 드래그하여 설치합니다.
-설치 후, 터미널을 열고 code . 명령어가 작동하는지 확인합니다. 작동하지 않는다면, PATH에 VS Code를 추가해야 합니다.
-결과 확인
-VS Code를 설치하고 나면, VS Code를 실행해 기본 화면이 정상적으로 열리는지 확인하세요.
+2.검색란의 visual studio code검색
 
-2. GitHub 설정
-GitHub는 소스 코드 관리를 위한 서비스로, 특히 협업 개발에 매우 유용합니다. GitHub CLI를 사용하면 터미널에서 직접 GitHub을 관리할 수 있습니다.
+![image](https://github.com/user-attachments/assets/98f14d69-e151-409b-b244-627cd6c02694)
 
-GitHub 계정 생성
-GitHub 공식 사이트에 접속합니다.
-오른쪽 상단의 Sign up 버튼을 클릭하여 계정을 생성합니다.
-이메일 주소, 비밀번호 등을 입력하고 회원가입을 완료합니다.
-GitHub CLI 설치
-GitHub CLI는 명령줄에서 GitHub 작업을 수행할 수 있는 도구입니다. 이 도구를 사용하면 코드 푸시, 이슈 생성 등을 터미널에서 직접 할 수 있습니다.
+3.왼측상단에 visual studio code - code editing. Redefined 클릭
+
+
+![image](https://github.com/user-attachments/assets/93fa49af-4d99-49d8-8385-8e38dfb873db)
+
+4.파란색 버튼안에 Download for Window버튼을 클릭한다 
+
+![image](https://github.com/user-attachments/assets/6f144f75-d10e-4142-bc47-a5ff2b35f570)
+
+![image](https://github.com/user-attachments/assets/4c9dbeb7-1168-400a-847a-3a0a927163e9)
+
+5. 이렇게 우측 상단에 있는 다운로드 기록을 보면 visual studio code가 다운로드가 되고있음을 볼수있다.
+
+![image](https://github.com/user-attachments/assets/6cd21164-a0d2-4117-b0c9-93ed9d3c03b0)
+
+우측상단에 다운로드가 다 되었다고 뜨면 폴더를 클릭하여 다운로드 폴더로 이동한다
+
+![image](https://github.com/user-attachments/assets/43faacdc-e078-4f21-a093-296fc11e50b9)
+
+이렇게 visual studio code가 다운로드 되있는데 보일것이다
+지금 보이는 VScodeUserSetup.exe에다가 마우스 포인터를 갖다댄후 더블클릭을 해준다
+
+![image](https://github.com/user-attachments/assets/4212627d-391d-476a-816d-66b4c2b3f9f4)
+
+그럼 이 화면이 나올텐데 동의합니다(A)를 선택후 사진에는 없지만 다음(next)버튼을 눌러서 넘어간다
+
+![image](https://github.com/user-attachments/assets/8a4ae618-d649-48fa-9473-5e6ae048ae9d)
+
+그다음은 투가 작업선택창이 나올텐데 처음 보면 밑에 2개만 선택 되있을것이다
+여기사ㅓ 우리는 모두 선태하고 이번에도 마찬가지로 사진에는 없지만 다음(next)버튼을 눌러서 넘어간다
+
+![image](https://github.com/user-attachments/assets/bdbefc0c-3f5d-43a5-a58b-e75e60a3e750)
+
+이제 그럼 이 화면이 나올텐데 여기서 설치 버튼을 누르면 설치가 진행된다
+설치가 완료되ㅣ면 화면 닫기를 누른다
+
+
+2. 크롬 검색창에 github를 입력한다
+3. 
+ ![image](https://github.com/user-attachments/assets/8cf8984e-6f57-4abe-be82-f9f5f7439ae1)
+
+밑에 아이콘과 같이 github라고 되있는 것을 클릭한다
+
+![image](https://github.com/user-attachments/assets/8d2ca1a5-8190-4727-8a64-c1f3b4a57327)
+
+여기서 GitHub: Let's build from here · GitHub 이 부분을 클릭한다.
+
+![image](https://github.com/user-attachments/assets/eef6cd76-1d34-4726-a114-f1d3d0b9d389)
+
+처음 들어가면 이렇게 화면이 보일것이다
+여기서 sigh버튼을 누른다
+그럼 이렇게 자신의 이메일을 넣는공간이 나올것이다
+
+![image](https://github.com/user-attachments/assets/bbefb2bf-4d5a-4f37-a112-33e4a60e9699)
+
+enter your email밑에
+
+![image](https://github.com/user-attachments/assets/8ec03d22-f4a4-4888-a068-8568dafba29a)
+
+그럼 이렇게 비밀번호를 만드는곳이 생길것이다.
+create a password밑에 자신이 원하는 비밀번호를 입력한다
+
+![image](https://github.com/user-attachments/assets/27cc3068-96bf-4a0f-8d8e-e2bb27a3cb06)
+
+username을 입력하는곳이 나올것이다
+enter a username 여기 밑에 입력을 한다
+
+
+![image](https://github.com/user-attachments/assets/e8f11e90-236d-4546-909b-2f8fe7645cc2)
+
+여기에 마지막으로 email을 정보수집 동의를 한다는 체크박스에 표시를 하고 countiue버튼을 누른다
+
+잠시기다리면 로봇이 아닙니다 관련 퀴즈를 풀어야 계정을 생성할수있다
 
 Windows 설치 방법
 명령 프롬프트나 PowerShell을 엽니다.
 
 다음 명령어를 입력해 GitHub CLI를 설치합니다:
+winget이 설치되지 않은 분들은 
+마이크로소프트 스토어를 검색 -->열기-->검색 클릭-->앱 설치 관리자  검색--> 설치
+![image](https://github.com/user-attachments/assets/5bc6f988-8826-44e6-a6a4-d4cd85031cb0)
+하지만 미리보기 버전을 설치하기 위해서는 먼저 패키지 매니저 인사이더 프로그램이나 윈도우 인사이더 프로그램에 가입해야합니다.
 
+Join the Windows Package Manager Insiders Program
+Windows Insider
+이 방법을 사용해도 괜찮습니다만 여기서는 인사이더 프로그램 가입 없이 바로 winget 명령어를 설치하는 방법을 소개하겠습니다.
 
+최근 Microsoft의 소프트웨어 개발 기조가 바뀌면서 Windows Terminal, PowerShell, winget-cli 등 많은 애플리케이션이 오픈소스로 개발되고 있습니다. winget-cli 역시 오픈소스 프로젝트로 개발되고 있으며, GitHub를 통해서 소스코드 및 릴리스 파일이 공개되어있습니다. 아래 GitHub의 릴리스 페이지에서 winget-cli의 최신 버전을 다운로드 받고 설치할 수 있습니다.
+
+Releases · microsoft/winget-cli
+릴리스에는 프리뷰가 붙은 버전과 붙지 않은 버전이 있습니다. 이는 마이크로소프트 스토어에서 제공하는 앱 설치 관리자와는 달리 둘 다 커맨드라인 명령어를 제공합니다. 여기서는 preview가 없는 정식 버전을 설치해보겠습니다. 현재 시점에서 최신 버전인 v1.0.11451 버전의 릴리스 페이지로 이동합니다.
+
+Release Windows Package Manager v1.0.11451 · microsoft/winget-cli
+이 페이지 하단에서 확장자가 .appxbundle로 끝나는 설치 파일을 다운로드 받고 실행합니다.
+
+커맨드라인 명령어를 포함한 앱 설치 관리자를 설치합니다
+커맨드라인 명령어를 포함한 앱 설치 관리자를 설치합니다
+앱 설치 관리자를 업데이트할 지 물어봅니다. 설치 과정에서 확인할 수 있듯이, 릴리스 페이지에서 제공하는 파일은 Microsoft에서 공식적으로 개발중인 버전으로 신뢰할 수 있는 Microsoft Store 앱입니다. 업데이트를 클릭해 설치를 진행합니다.
+
+winget 설치가 완료된 화면
+winget 설치가 완료된 화면
+설치가 끝나면 위와 같은 화면이 나타납니다. 별도로 종료 버튼이 없으니, 설치 창은 종료해주시기바랍니다.
+
+winget 명령어 설치 확인#
+이제 가상 터미널에서 winget 명령어로 패키지를 설치할 수 있습니다. 간단히 테스트를 위해서 Windows Terminal이나 Powershell을 실행해주세요. 아직 Windows Terminal을 설치하지 않았다면 먼저 설치하는 것을 추천합니다. (이미 셸이 실행되어있었다면 터미널을 재실행해야 winget이 정상적으로 실행됩니다.)
+
+관련 글:Windows Terminal(PowerShell, WSL2 등) 설치하는 방법
+셸에서 winget 명령어를 입력해보면 v1.0.11451이 설치된 것을 확인할 수 있습니다.
 winget install --id GitHub.cli
 설치가 완료되면, 터미널에서 다음 명령어로 GitHub에 로그인합니다:
-
 gh auth login
 로그인 과정 중 GitHub.com과 HTTPS를 선택한 후 GitHub 계정 정보를 입력합니다.
 macOS 설치 방법

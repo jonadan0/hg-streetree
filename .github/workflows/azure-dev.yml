@@ -30,10 +30,10 @@ jobs:
       - name: Log in with Azure (Federated Credentials)
         run: |
           azd auth login `
-            --client-id "${AZURE_CLIENT_ID}" `
+            --client-id "$Env:AZURE_CLIENT_ID" `
             --federated-credential-provider "github" `
-            --tenant-id "${AZURE_TENANT_ID}"
-        shell: bash
+            --tenant-id "$Env:AZURE_TENANT_ID"
+        shell: pwsh
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
@@ -41,7 +41,4 @@ jobs:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
 
       - name: Deploy Application
-        run: |
-          azd deploy --no-prompt --verbose`
-          -- app-name: "${{ secrets.AZURE_APP_NAME }}-app" `
-          -- publish-profile: "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}""
+        run: azd deploy --no-prompt
