@@ -137,5 +137,91 @@ cd $frontend
 아래 명령어를 실행시켜 GitHub Actions 워크플로우를 실행시킬 수 있는 환경을 설정합니다.
 azd pipeline config
 설정 마지막에 Would you like to commit and push your local changes to start the configured CI pipeline? 라는 질문이 나오면 n를 선택하고 종료합니다.
-### 시작해봅시다
+mac 개발 환경 설정
+1. Visual Studio Code 설치
+VS Code 공식 사이트에서 macOS용 버전을 다운로드하고 설치합니다.
+2. GitHub 설정
+GitHub 계정 생성
 
+GitHub 공식 사이트에서 계정을 생성합니다.
+Homebrew 설치 (GitHub CLI 설치를 위해 필요)
+
+터미널을 열고 다음 명령어를 입력하여 Homebrew를 설치합니다:
+bash
+코드 복사
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+GitHub CLI 설치
+
+Homebrew를 사용해 GitHub CLI를 설치합니다:
+bash
+코드 복사
+brew install gh
+설치 후, gh auth login 명령어로 GitHub 계정에 로그인합니다.
+3. Azure 설정
+Azure 계정 생성
+Azure 공식 사이트에서 계정을 생성합니다.
+Azure CLI 설치
+Homebrew를 사용해 Azure CLI를 설치합니다:
+bash
+코드 복사
+brew install azure-cli
+설치 후, az login 명령어를 사용하여 Azure 계정에 로그인합니다.
+Azure Developer CLI 설치
+Homebrew를 사용하여 Azure Developer CLI를 설치합니다:
+bash
+코드 복사
+brew tap azure/azd
+brew install azd
+설치 후, azd auth login 명령어를 사용하여 Azure 계정에 로그인합니다.
+Azure Resource Group 생성
+Azure CLI를 사용하여 자원 그룹을 생성합니다:
+bash
+코드 복사
+az group create --name myResourceGroup --location eastus
+4. Node.js 설치 및 React.js, Express.js 설정
+Node.js 설치
+Homebrew를 사용하여 Node.js를 설치합니다:
+bash
+코드 복사
+brew install node
+React.js 프로젝트 생성
+터미널에서 다음 명령어로 React.js 프로젝트를 생성합니다:
+bash
+코드 복사
+npx create-react-app my-react-app
+cd my-react-app
+code .
+Express.js 프로젝트 생성
+터미널에서 다음 명령어로 Express.js 프로젝트를 생성합니다:
+bash
+코드 복사
+npx express-generator my-express-app
+cd my-express-app
+npm install
+code .
+5. VS Code Extensions 설치
+GitHub: GitHub와 통합된 기능을 제공하는 확장 프로그램입니다.
+Azure Tools: Azure 리소스를 관리할 수 있는 확장 프로그램입니다.
+ESLint: 코드 스타일을 검사하고 정리하는 도구입니다.
+Prettier: 코드 포맷팅 도구입니다.
+VS Code의 확장 프로그램 탭에서 위의 확장 프로그램들을 설치합니다.
+
+6. Git 및 프로젝트 관리
+GitHub에 프로젝트를 올리려면, 터미널에서 다음 명령어를 사용합니다:
+bash
+코드 복사
+git init
+git add .
+git commit -m "Initial commit"
+gh repo create <repository-name> --public --source=. --push
+### 시작해봅시다
+> 먼저 **hackersground-kr/streetree** 저장소를 자신의 GitHub 계정으로 포크해야합니다.
+> ![alt text](images/image1.png)
+> 우측 상단의 Fork 버튼을 눌러주세요.
+
+> ![alt text](images/image2.png)
+> 이후 초록색 Create Fork 버튼을 눌러 포크할 수 있습니다.
+
+> 포크된 저장소로 이동한 후
+> ![alt text](images/image3.png)
+> 
