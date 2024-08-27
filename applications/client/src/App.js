@@ -107,6 +107,7 @@ function Catalog() {
   const [startId, setStartId] = useState(1);
   const [endId, setEndId] = useState(50);
   const [farms, setFarms] = useState([]);
+  const [selectFarm, setSelectFarm] = useState({});
 
   const handleSearch = async () => {
     try {
@@ -183,7 +184,7 @@ function Catalog() {
             <ul>
               {farms.map((farm) => (
                 <div className={styles.farmPreviewList}>
-                <div className={styles.PreviewList}>
+                <div className={styles.PreviewList} onClick={setSelectFarm(farm)}>
                   <div className={styles.simpleList}>
                     <div className={styles.br}>주소 : {farm.address}</div>
                     <div>작물 : {farm.crop}</div>
@@ -212,6 +213,10 @@ function Catalog() {
         ) : (
           <p>검색 결과가 없습니다.</p> // 검색 결과가 없는 경우를 대비
         )}
+      </div>
+      <div className={styles.farmPreviewInfo} style={{float: "right"}}>
+        <h2>상세정보</h2><div>{selectFarm.info}</div>
+        <h2>일당</h2><div>{selectFarm.giveMoney ? selectFarm.money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원" : "없음"}</div>
       </div>
     </section>
   );
@@ -360,15 +365,6 @@ function Regist({phone, name, handle}) {
           <h2>일당</h2><div>{farmGiveMoney ? farmMoney.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원" : "없음"}</div>
         </div>
       </div>
-    </section>
-  );
-}
-
-
-function Community() {
-  return (
-    <section>
-      2
     </section>
   );
 }
@@ -533,7 +529,7 @@ function App() {
   const viewList = {
     "둘러보기": <Catalog />,
     "등록하기": <Regist phone={phone} name={name} handle={handleViewChange} />,
-    "소통마당": <Community />,
+    // "소통마당": <Community />,
   };
 
   const [view, setView] = useState(viewList["둘러보기"]);
