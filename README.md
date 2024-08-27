@@ -449,12 +449,12 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > 애플리케이션 URL을 복사합니다.
 > ![alt text](images/image22.png)
 
-> 로컬 저장소로 돌아와 `hg-streetree/applications/client/config/apiconfig.json` 파일을 엽니다.
-> ![alt text](images/image18.png)<br>
+> 다시 프로젝트가 있는 깃허브의 레포지토리로 갑니다.
+> ![alt text](images/image23.png)<br>
 
-> `{{ SERVER URL }}` 텍스트를 지우고 애저에서 제공한 서버 URL을 입력하고 커밋합니다.
-> ```
-> {
->     "url": "{{ SERVER URL }}"
-> }
-> ```
+> 상단의 Settings을 찾은 후 누릅니다.
+
+> Security탭 안의 Secrets and variables에서 Actions를 찾아 누릅니다.
+> ![alt text](images/image24.png)<br>
+
+> name에 `SERVER URL`과 Secret값에 복사한 서버 애플리케이션 URL을 입력하고 커밋합니다.
