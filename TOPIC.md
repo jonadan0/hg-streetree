@@ -46,7 +46,7 @@ AI 기능 :문의 답변
 
 ## 제품 아키텍처 (이미지)
 
-![alt text](images/arci.png)
+![alt text](images/arci최종.png)
 
 ## 제품 소개 슬라이드
 
