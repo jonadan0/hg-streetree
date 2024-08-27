@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = require("./config/apiconfig.json").url;
+const API = process.env.SERVER_URL;
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
