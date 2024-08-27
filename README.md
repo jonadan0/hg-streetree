@@ -387,7 +387,6 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 
 > Name에 이름을 적고, 밑의 Secret란에는 값을 적어야합니다. 다음을 보고 참고해주세요. 
 
-> `{{ }}`로 감싸진 필드를 전부 알맞은 값으로 바꿔주세요. <br>
 > `AZDB_USERNAME` : AzureSQL의 사용자 이름<br>
 > `AZDB_PASSWORD`: AzureSQL의 사용자 패스워드<br>
 > `AZDB_SERVER`: AzureSQL의 서버 이름<br>
