@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = "http://localhost:5000"
+const API = "https://ca-server-iesfcdba3xnfa.mangodesert-97853e9d.koreacentral.azurecontainerapps.io"
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
@@ -105,7 +105,7 @@ function Main({ view }) {
 
 function Catalog() {
   const [startId, setStartId] = useState(1);
-  const [endId, setEndId] = useState(5);
+  const [endId, setEndId] = useState(50);
   const [farms, setFarms] = useState([]);
 
   const handleSearch = async () => {
@@ -194,7 +194,7 @@ function Catalog() {
                   <label>소개글:</label><div>{farm.intro}</div>
                   <div className={`${styles.br} ${styles.side}`} style={{width:"35vw"}}>
                     <div className={styles.fix}>전화번호 : {farm.showPhone ? farm.phone : "비공개"}</div>
-                    <div className={`${styles.inline} ${styles.space}`} style={{right:"1.65vw"}}>
+                    <div className={`${styles.inline} ${styles.space}`} style={{left:"1.1vw"}}>
                       실명 : {farm.showName ? farm.name : "비공개"}
                     </div>
                     시작날짜
@@ -202,7 +202,7 @@ function Catalog() {
                   <div className={styles.side} style={{width:"35vw"}}>
                     <div>조건 : {farm.work ? "농업 유경험자 희망" : "누구나"}</div>
                     <div style={{width:"7.9vw"}}>기간(일) : {farm.day}</div>
-                    {farm.date}
+                    {String(farm.date).slice(0, 10)}
                   </div>
                 </div>
               </div>
