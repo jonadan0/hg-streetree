@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = process.env.SERVER_URL;
+const API = process.env.SERVER_BASE_URL;
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
