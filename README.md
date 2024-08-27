@@ -430,3 +430,33 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > Action 탭에서 커밋한 시점의 워크플로우가 성공되는지 확인합니다.
 
 
+
+> 이제 프론트엔드와 백엔드를 연결 할 차례입니다.<br>
+> https://portal.azure.com/<br>
+> 위 링크를 통해 애저 포털로 접속합니다.
+
+> 상단의 리소스 그룹을 클릭합니다.
+> ![alt text](images/image19.png)
+
+> 사진과 같이 자신의(팀의) 리소스 그룹을 검색하고<br>
+> 자신의(팀의) 리소스 그룹에 접속합니다.<br>
+> ![alt text](images/image20.png)
+
+> ca-server로 시작하는 리소스를 클릭합니다.
+> ![alt text](images/image21.png)
+
+> 애플리케이션 URL을 복사합니다.
+> ![alt text](images/image22.png)
+
+> 로컬 저장소로 돌아와 `hg-streetree/applications/client/config/apiconfig.json` 파일을 엽니다.
+> ![alt text](images/image18.png)<br>
+
+> `{{ SERVER URL }}` 텍스트를 지우고 애저에서 제공한 서버 URL을 입력하고 커밋합니다.
+> ```
+> {
+>     "url": "{{ SERVER URL }}"
+> }
+> ```
+
+
+
