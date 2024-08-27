@@ -460,11 +460,12 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 
 > 거의 끝났습니다.
 > ```
-> az container create \
->   --resource-group {{ RESOURCE_GROUP }} \
->   --name dbconfig \
->   --image {{ IMAGE_NAME }} \
+> az container create `
+>   --resource-group {{ RESOURCE_GROUP }} `
+>   --name dbconfig `
+>   --image {{ IMAGE_NAME }} `
 >   --environment-variables AZDB_USERNAME={{ AZDB_USERNAME }} AZDB_PASSWORD={{ AZDB_PASSWORD }} AZDB_SERVER={{ AZDB_SERVER }} AZDB_DATABASE={{ AZDB_DATABASE }}
+> 윈도우 파워셸이 아닌 환경에선 백텍(`) 대신 역슬레시(\)를 사용하도록 합니다
 > ```
 > `{{ RESOURCE_GROUP }}` 텍스트를 자신의(팀의) 애저 리소스 그룹 이름으로<br>
 > `{{ IMAGE_NAME }}` 텍스트를 컨테이너 이미지의 이름으로<br>
