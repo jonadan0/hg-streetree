@@ -457,4 +457,4 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > Security탭 안의 Secrets and variables에서 Actions를 찾아 누릅니다.
 > ![alt text](images/image24.png)<br>
 
-> name에 `SERVER URL`과 Secret값에 복사한 서버 애플리케이션 URL을 입력하고 커밋합니다.
+> name에 `SERVER_URL`과 Secret값에 복사한 서버 애플리케이션 URL을 입력하고 커밋합니다.
