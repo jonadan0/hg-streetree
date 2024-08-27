@@ -104,12 +104,118 @@ function Main({ view }) {
 }
 
 function Catalog() {
+  const [startId, setStartId] = useState(1);
+  const [endId, setEndId] = useState(5);
+  const [farms, setFarms] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      console.log(`Fetching farms between IDs ${startId} and ${endId}`);
+      const response = await fetch(`${API}/farm/getfarms`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ startId, endId }),
+      });
+  
+      const data = await response.json();
+      console.log('Received data:', data);
+  
+      if (data.success) {
+        let farms = data.data;
+  
+        // 데이터가 배열이 아닌 경우 배열로 변환
+        if (!Array.isArray(farms)) {
+          farms = [farms];
+        }
+  
+        setFarms(farms[0]["recordset"]);
+        console.log('Farms array length:', farms.length);
+      } else {
+        alert('데이터를 가져오는데 실패했습니다: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching farms:', error);
+      alert('오류가 발생했습니다.');
+    }
+  };
+  
+  useEffect(() => {
+    console.log('Farms state updated:', farms);
+  }, [farms]);
+
+  useEffect(() => {
+    handleSearch();
+    console.log('Farms state after search:', farms); // farms의 상태 확인
+  }, []);
+
   return (
     <section>
-      <div className={styles.farmList}></div>
-      <div className={styles.farmInfo}></div>
+      <div>
+        <h1>농장 정보 검색</h1>
+        <div>
+          <label>
+            시작 ID:
+            <input
+              type="number"
+              value={startId}
+              onChange={(e) => setStartId(Number(e.target.value))}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            종료 ID:
+            <input
+              type="number"
+              value={endId}
+              onChange={(e) => setEndId(Number(e.target.value))}
+            />
+          </label>
+        </div>
+        <button onClick={handleSearch}>검색</button>
+      </div>
+      <div>
+        {farms.length > 0 ? (
+          <div>
+            <h2>검색 결과</h2>
+            <ul>
+              {farms.map((farm) => (
+                <div className={styles.farmPreviewList}>
+                <div className={styles.PreviewList}>
+                  <div className={styles.simpleList}>
+                    <div className={styles.br}>주소 : {farm.address}</div>
+                    <div>작물 : {farm.crop}</div>
+                    <div className={styles.br}>일당 유무 : {farm.giveMoney ? "일당 O" : "자원봉사 희망"}</div>
+                  </div>
+                </div>
+                <div className={`${styles.right}`}>
+                  <label>소개글:</label><div>{farm.intro}</div>
+                  <div className={`${styles.br} ${styles.side}`} style={{width:"35vw"}}>
+                    <div className={styles.fix}>전화번호 : {farm.showPhone ? farm.phone : "비공개"}</div>
+                    <div className={`${styles.inline} ${styles.space}`} style={{right:"1.65vw"}}>
+                      실명 : {farm.showName ? farm.name : "비공개"}
+                    </div>
+                    시작날짜
+                  </div>
+                  <div className={styles.side} style={{width:"35vw"}}>
+                    <div>조건 : {farm.work ? "농업 유경험자 희망" : "누구나"}</div>
+                    <div style={{width:"7.9vw"}}>기간(일) : {farm.day}</div>
+                    {farm.date}
+                  </div>
+                </div>
+              </div>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>검색 결과가 없습니다.</p> // 검색 결과가 없는 경우를 대비
+        )}
+      </div>
     </section>
   );
+  
 }
 
 function Regist({phone, name, handle}) {
@@ -121,21 +227,9 @@ function Regist({phone, name, handle}) {
   const [farmCrop, setFarmCrop] = useState('');
   const [farmWork, setFarmWork] = useState(false);
   const [farmPhone, setFarmPhone] = useState(false);
-  const [previewSrc, setPreviewSrc] = useState(null);
   const [farmName, setFarmName] = useState(null);
   const [farmDay, setFarmDay] = useState('');
   const [farmDate, setFarmDate] = useState('');
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewSrc(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleRegistSubmit = async (e) => {
     e.preventDefault();
@@ -145,7 +239,7 @@ function Regist({phone, name, handle}) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ previewSrc, farmAddress, farmCrop, farmGiveMoney, farmIntro, farmPhone, farmName, farmWork, farmDay, farmDate, farmInfo, farmMoney  }),
+        body: JSON.stringify({ farmAddress, farmCrop, farmGiveMoney, farmIntro, farmPhone, farmName, farmWork, farmDay, farmDate, farmInfo, farmMoney  }),
       });
 
       // 응답이 JSON 형식인지 먼저 확인
@@ -181,14 +275,6 @@ function Regist({phone, name, handle}) {
               <FormInput required={true} placeholder="마늘" label="작물" name="farmCrop" value={farmCrop} onChange={(e) => setFarmCrop(e.target.value)} />
               
               <div >
-                <label htmlFor="farmImage">밭 사진:</label>
-                <input 
-                  type="file" 
-                  id="farmImage" 
-                  name="farmImage" 
-                  accept="image/*" 
-                  onChange={handleImageChange} 
-                />
                 <FormInput required={true} type="date" label="날짜" name="farmDate" value={farmDate} onChange={(e) => setFarmDate(e.target.value)} />
               </div>
               <FormInput required={true} maxlength="20" placeholder="건강한 청년 구해요~" label="소개글" name="farmIntro" value={farmIntro} onChange={(e) => setFarmIntro(e.target.value)} />
@@ -244,17 +330,6 @@ function Regist({phone, name, handle}) {
           </form>
 
           <div className={styles.farmPreviewList}>
-            <img 
-              className={styles.image}
-              src={previewSrc || 'placeholder_image.png'} 
-              alt="사진 없음" 
-              style={{ 
-                width: '10vw', 
-                height: '5vw', 
-                objectFit: 'cover',
-                overflow: 'hidden'
-              }}
-            />
             <div className={styles.PreviewList}>
               <div className={styles.simpleList}>
                 <div className={styles.br}>주소 : {farmAddress}</div>
@@ -264,22 +339,23 @@ function Regist({phone, name, handle}) {
             </div>
             <div className={`${styles.right}`}>
               <label>소개글:</label><div>{farmIntro}</div>
-              <div className={`${styles.br} ${styles.side}`}>
+              <div className={`${styles.br} ${styles.side}`} style={{width:"35vw"}}>
                 <div className={styles.fix}>전화번호 : {farmPhone ? phone : "비공개"}</div>
-                <div className={`${styles.inline} ${styles.space}`}>
+                <div className={`${styles.inline} ${styles.space}`} style={{right:"1.65vw"}}>
                   실명 : {farmName ? name : "비공개"}
                 </div>
+                시작날짜
               </div>
-              <div className={styles.side} style={{width:"22vw"}}>
+              <div className={styles.side} style={{width:"35vw"}}>
                 <div>조건 : {farmWork ? "농업 유경험자 희망" : "누구나"}</div>
                 <div style={{width:"7.9vw"}}>기간(일) : {farmDay}</div>
+                {farmDate}
               </div>
             </div>
           </div>
         </div>
 
         <div className={styles.farmPreviewInfo}>
-          <h2>시작 날짜</h2><div>{farmDate}</div>
           <h2>상세정보</h2><div>{farmInfo}</div>
           <h2>일당</h2><div>{farmGiveMoney ? farmMoney.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원" : "없음"}</div>
         </div>
