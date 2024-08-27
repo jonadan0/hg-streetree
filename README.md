@@ -144,7 +144,6 @@ Release Windows Package Manager v1.0.11451 · microsoft/winget-cli
 앱 설치 관리자를 업데이트할 지 물어봅니다. 설치 과정에서 확인할 수 있듯이, 릴리스 페이지에서 제공하는 파일은 Microsoft에서 공식적으로 개발중인 버전으로 신뢰할 수 있는 Microsoft Store 앱입니다. 업데이트를 클릭해 설치를 진행합니다.
 
 winget 설치가 완료된 화면
-winget 설치가 완료된 화면
 설치가 끝나면 위와 같은 화면이 나타납니다. 별도로 종료 버튼이 없으니, 설치 창은 종료해주시기바랍니다.
 
 winget 명령어 설치 확인#
@@ -158,6 +157,33 @@ gh auth login
 로그인 과정 중 GitHub.com과 HTTPS를 선택한 후 GitHub 계정 정보를 입력합니다.
 macOS 설치 방법
 터미널을 열고 다음 명령어를 입력하여 Homebrew를 설치합니다(이미 설치되어 있다면 생략 가능):
+Homebrew 공식 홈페이지
+
+https://brew.sh/
+Homebrew 설치하기
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+
+MacBook 패스워드를 입력 한 후 설치를 계속 진행한다.
+
+
+
+계속 진행하기 위해 엔터키를 누르고 이제 설치가 끝날 때 까지 기다리면 된다.
+
+설치 완료 후 터미널에 brew --verwion 명령을 입력한다.
+
+$ brew --version
+zsh: command not found: brew
+만약 위와 같은 오류가 발생한다면 Homebrew 경로를 추가한다.
+
+
+# zshrc에 homebrew path 추가
+$ echo 'export PATH=/opt/homebrew/bin:$PATH' >> ~/.zshrc
+# zshrc 반영
+$ source ~/.zshrc
+
+
+위와 같이 버전이 정상적으로 표시된다면 이제 Homebrew를 사용할 수 있다.
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 다음 명령어를 입력해 GitHub CLI를 설치합니다:
