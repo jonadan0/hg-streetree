@@ -26,18 +26,17 @@
 > **아래 제공하는 설치 방법을 통해 심사위원단이 여러분의 제품/서비스를 실제 Microsoft 애저 클라우드에 배포하고 설치할 수 있어야 합니다. 만약 아래 설치 방법대로 따라해서 배포 및 설치가 되지 않을 경우 본선에 진출할 수 없습니다.**
 
 ### 사전 준비 사항
-- Visual Studio code
-- GitHub
-    - GitHub Account
-    - GitHub CLI
-- Azure
-    - Azure Account
-    - Azure CLI
-    - Azure Developer CLI
-    - Azure Resource Group
-- NodeJS
-    - React.js
-    - Express.js
+비주얼 스튜디오 코드 설치
+깃허브 설치
+GitHub 계정 생성
+깃허브 CLI 설치
+Azure 계정 생성
+Azure CLI 설치
+Azure 개발자 CLI설치
+Azure 리소스 그룹 확인
+노드JS 설치
+리액트.js 설치
+익스프레스.js 설치
 
 ## 시작하기
 ### 환경설정
@@ -374,23 +373,26 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 > ![alt text](images/image13.png) <br>
 > 마지막으로 검토 + 만들기를 선택해줍니다.
 
-> 다시 로컬 저장소 디렉토리를 열어줍니다. <br>
-> ![alt text](images/image14.png) <br>
-> `hg-streetree/applications/server/config/dbconfig.example.json` 파일을 열어줍니다.
-> ```
-> {
->     "user": "{{ AZDB_USERNAME }}",
->     "password": "{{ AZDB_PASSWORD }}",
->     "server": "{{ AZDB_SERVER }}",
->     "database": "{{ AZDB_DATABASE }}"
-> }
-> ```
+> # DB연동
+
+> 프로젝트가 있는 깃허브의 레포지토리로 갑니다.
+> ![alt text](images/image23.png)<br>
+
+> 상단의 Settings을 찾은 후 누릅니다.
+
+> Security탭 안의 Secrets and variables에서 Actions를 찾아 누릅니다.
+> ![alt text](images/image24.png)<br>
+
+> New repository secret라고 적혀있는 초록색 버튼을 누릅니다.
+
+> Name에 이름을 적고, 밑의 Secret란에는 값을 적어야합니다. 다음을 보고 참고해주세요. 
+
 > `{{ }}`로 감싸진 필드를 전부 알맞은 값으로 바꿔주세요. <br>
-> `{{ AZDB_USERNAME }}`: AzureSQL의 사용자 이름<br>
-> `{{ AZDB_PASSWORD }}`: AzureSQL의 사용자 패스워드<br>
-> `{{ AZDB_SERVER }}`: AzureSQL의 서버 이름<br>
-> `{{ AZDB_DATABASE }}`: AzureSQL의 데이터베이스 이름<br>
-> 이후 파일명을 `dbconfig.example.json`에서 `dbconfig.json`로 바꿔주면 됩니다.
+> `AZDB_USERNAME` : AzureSQL의 사용자 이름<br>
+> `AZDB_PASSWORD`: AzureSQL의 사용자 패스워드<br>
+> `AZDB_SERVER`: AzureSQL의 서버 이름<br>
+> `AZDB_DATABASE`: AzureSQL의 데이터베이스 이름<br>
+
 
 > 배포 초기 설정을 위해 터미널에서 아래 명령을 실행합니다.<br>
 > (vscode 기준 Ctrl+` 로 터미널을 열 수 있습니다.)
@@ -457,6 +459,3 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 >     "url": "{{ SERVER URL }}"
 > }
 > ```
-
-
-
