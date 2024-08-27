@@ -458,22 +458,23 @@ GitHub에 업로드된 프로젝트를 확인하려면, GitHub 사이트에서 �
 
 
 
-> 이제 프론트엔드와 백엔드를 연결 할 차례입니다.<br>
-> https://portal.azure.com/<br>
-> 위 링크를 통해 애저 포털로 접속합니다.
+> 거의 끝났습니다.
+> ```
+> az container create \
+>   --resource-group {{ RESOURCE_GROUP }} \
+>   --name dbconfig \
+>   --image {{ IMAGE_NAME }} \
+>   --environment-variables AZDB_USERNAME={{ AZDB_USERNAME }} AZDB_PASSWORD={{ AZDB_PASSWORD }} AZDB_SERVER={{ AZDB_SERVER }} AZDB_DATABASE={{ AZDB_DATABASE }}
+> ```
+> `{{ RESOURCE_GROUP }}` 텍스트를 자신의(팀의) 애저 리소스 그룹 이름으로<br>
+> `{{ IMAGE_NAME }}` 텍스트를 컨테이너 이미지의 이름으로<br>
+> `{{ AZDB_USERNAME }}` 텍스트를 AzureSQL 사용자 이름으로<br>
+> `{{ AZDB_PASSWORD }}` 텍스트를 AzureSQL 비밀번호로<br>
+> `{{ AZDB_SERVER }}` 텍스트를 AzureSQL 서버 이름으로<br>
+> `{{ AZDB_DATABASE }}` 텍스트를 AzureSQL 데이터베이스 이름으로<br>
+> 전부 바꿔 터미널에 실행해주세요.
 
-> 상단의 리소스 그룹을 클릭합니다.
-> ![alt text](images/image19.png)
 
-> 사진과 같이 자신의(팀의) 리소스 그룹을 검색하고<br>
-> 자신의(팀의) 리소스 그룹에 접속합니다.<br>
-> ![alt text](images/image20.png)
-
-> ca-server로 시작하는 리소스를 클릭합니다.
-> ![alt text](images/image21.png)
-
-> 애플리케이션 URL을 복사합니다.
-> ![alt text](images/image22.png)
 
 > 다시 프로젝트가 있는 깃허브의 레포지토리로 갑니다.
 > ![alt text](images/image23.png)<br>
