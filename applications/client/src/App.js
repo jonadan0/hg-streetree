@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 
-const API = process.env.SERVER_BASE_URL;
+const API = "https://ca-server-iesfcdba3xnfa.mangodesert-97853e9d.koreacentral.azurecontainerapps.io";
 
 function Button({ text, handle, className, value, type, disabled }) {
   return (
@@ -519,6 +519,7 @@ function App() {
   const [name, setName] = useState("홍길동");
 
   const handleViewChange = (key) => {
+    console.log(API)
     if (key === "로그인") {
       setView(<Login handle={handleViewChange} setLoggedIn={setLoggedIn} />);
     } else {
